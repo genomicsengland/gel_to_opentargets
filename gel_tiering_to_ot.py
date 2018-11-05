@@ -11,7 +11,7 @@ import re
 SOURCE_ID = "eva"  # TODO change when using own source
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "GEL_main_programme"
-DATABASE_VERSION = "v4_2018-07-31"  # Change if version changes
+DATABASE_VERSION = "v5_2018-10-31"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 
 
