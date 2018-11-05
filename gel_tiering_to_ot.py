@@ -10,8 +10,8 @@ import re
 
 SOURCE_ID = "eva"  # TODO change when using own source
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
-DATABASE_ID = "GEL_main_programme"
-DATABASE_VERSION = "v5_2018-10-31"  # Change if version changes
+DATABASE_ID = "EVA" # Change to GEL Main Programme when working
+DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 
 
@@ -30,7 +30,7 @@ def main():
 
     logger.info("Reading TSV from " + args.input)
 
-    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id", "consequence_type"]
+    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id", "genomic_feature_hgnc", "consequence_type"]
 
     count = 0
 
@@ -49,7 +49,7 @@ def main():
 
         for row in reader:
             my_instance = build_evidence_strings_object(consequence_map, phenotype_map,
-                                                        row['genomic_feature_ensembl_id'], row['phenotype'],
+                                                        row['genomic_feature_ensembl_id'], row['genomic_feature_hgnc'], row['phenotype'],
                                                         row['db_snp_id'], row['consequence_type'], row['sample_id'],
                                                         row['tier'])
             if my_instance:
@@ -59,7 +59,7 @@ def main():
     logger.info("Processed %d objects" % count)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, phenotype, db_snp_id, consequence_type,
+def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hgnc_id, phenotype, db_snp_id, consequence_type,
                                   sample_id, tier):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
@@ -102,10 +102,11 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, ph
         },
         "target": {
             "id": "http://identifiers.org/ensembl/" + ensembl_id,
-            "target_type": "http://identifiers.org/cttv.target/gene_variant",
+            "target_type": "http://identifiers.org/cttv.target/gene_evidence",
             "activity": "http://identifiers.org/cttv.activity/loss_of_function"
         },
         "disease": {
+            "name": phenotype,
             "id": ontology_term
         },
         "type": "genetic_association",
@@ -126,6 +127,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, ph
                 "evidence_codes": [
                     "http://identifiers.org/eco/cttv_mapping_pipeline"
                 ],
+                "urls": [
+                    {
+                        "nice_name": "Sourced from Genomics England tiering data",
+                        "url": "https://www.genomicsengland.co.uk/" # TODO change for more specific URL
+                    }
+                ],
                 "functional_consequence": functional_consequence
             },
             "variant2disease": {
@@ -144,6 +151,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, ph
                 },
                 "evidence_codes": [
                     "http://identifiers.org/eco/GWAS"
+                ],
+                "urls": [
+                    {
+                        "nice_name": "Sourced from Genomics England tiering data",
+                        "url": "https://www.genomicsengland.co.uk/" # TODO change for more specific URL
+                    }
                 ]
             }
         }
