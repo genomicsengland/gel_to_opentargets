@@ -1,6 +1,10 @@
 # Importing Genomics England data into Open Targets
 
-## Phenotypes
+## gel_to_ot.py 
+
+Takes an input TSV (probably exported from the `tiering_data` table in LabKey) and generates JSON output (one object per line) which should be valid according to the [opentargets/validator](https://github.com/opentargets/validator).
+
+### Phenotypes
 
 `gel_to_ot.py` needs to have a set of mappings from disease name to EFO term; by default this should be in a file called `phenotypes_text_to_efo.txt`. This can be generated from GEL data as follows:
 
