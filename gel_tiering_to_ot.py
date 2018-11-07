@@ -8,9 +8,9 @@ import logging
 import sys
 import re
 
-SOURCE_ID = "eva"  # TODO change when using own source
+SOURCE_ID = "genomics_england_tiering"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
-DATABASE_ID = "EVA" # Change to GEL Main Programme when working
+DATABASE_ID = "genomics_england_tiering" # TODO Change to GEL Main Programme when working
 DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 
@@ -48,6 +48,7 @@ def main():
                 sys.exit(1)
 
         for row in reader:
+            # TODO just pass row dict into function, not field by field
             my_instance = build_evidence_strings_object(consequence_map, phenotype_map,
                                                         row['genomic_feature_ensembl_id'], row['genomic_feature_hgnc'], row['phenotype'],
                                                         row['db_snp_id'], row['consequence_type'], row['sample_id'],
@@ -88,7 +89,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hg
 
     ontology_term = phenotype_map[phenotype]
 
-    score = 1  # TODO actually calculate score
+    score = tier_to_score(tier)
 
     obj = {
         "sourceID": SOURCE_ID,
@@ -223,6 +224,21 @@ def read_phenotype_to_efo_mapping(filename):
 
     return phenotype_map
 
+
+def tier_to_score(tier):
+
+    tier = tier.lower()
+
+    if tier == "tier1":
+        score = 1
+    elif tier == "tier2":
+        score = 0.5
+    elif tier == "tier3":
+        score = 0.1
+    else:
+        score = 0
+
+    return score
 
 if __name__ == '__main__':
     sys.exit(main())
