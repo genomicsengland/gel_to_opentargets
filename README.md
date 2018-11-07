@@ -18,7 +18,7 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 `ontoma phenotypes.txt phenotypes_text_to_efo.txt`  
 
-4. Strip the OnToma output to create a file 
+4. Strip the OnToma output to create a file (not actually required since `gel_to_ot.py` only uses first 2 fields
 
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
 
