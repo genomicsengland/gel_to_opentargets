@@ -48,11 +48,7 @@ def main():
                 sys.exit(1)
 
         for row in reader:
-            # TODO just pass row dict into function, not field by field
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map,
-                                                        row['genomic_feature_ensembl_id'], row['genomic_feature_hgnc'], row['phenotype'],
-                                                        row['db_snp_id'], row['consequence_type'], row['sample_id'],
-                                                        row['tier'])
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -60,8 +56,7 @@ def main():
     logger.info("Processed %d objects" % count)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hgnc_id, phenotype, db_snp_id, consequence_type,
-                                  sample_id, tier):
+def build_evidence_strings_object(consequence_map, phenotype_map, row):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -69,40 +64,40 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hg
 
     logger = logging.getLogger(__name__)
 
-    if not re.match(SNP_REGEXP, db_snp_id):
+    if not re.match(SNP_REGEXP, row['db_snp_id']):
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
-                    "the list of allowed types, ignoring" % (sample_id, ensembl_id, phenotype, db_snp_id))
+                    "the list of allowed types, ignoring" % (row['sample_id'], row['genomic_feature_ensembl_id'], row['phenotype'], row['db_snp_id']))
         return
 
     logger.debug("Building container object")
 
-    if consequence_type not in consequence_map:
-        logger.error("Can't find consequence type mapping for %s, skipping this row" % consequence_type)
+    if row['consequence_type'] not in consequence_map:
+        logger.error("Can't find consequence type mapping for %s, skipping this row" % row['consequence_type'])
         return
 
-    functional_consequence = consequence_map[consequence_type]
+    functional_consequence = consequence_map[row['consequence_type']]
 
-    phenotype = phenotype.strip()
+    phenotype = row['phenotype'].strip()
     if phenotype not in phenotype_map:
         logger.error("Can't find phenotype mapping for %s, skipping this row" % phenotype)
         return
 
     ontology_term = phenotype_map[phenotype]
 
-    score = tier_to_score(tier)
+    score = tier_to_score(row['tier'])
 
     obj = {
         "sourceID": SOURCE_ID,
         "access_level": "public",
         "validated_against_schema_version": "1.2.8",
         "unique_association_fields": {
-            "sample_id": sample_id,
-            "gene": ensembl_id,
+            "sample_id": row['sample_id'],
+            "gene": row['genomic_feature_ensembl_id'],
             "phenotype": phenotype,
-            "variant": db_snp_id
+            "variant": row['db_snp_id']
         },
         "target": {
-            "id": "http://identifiers.org/ensembl/" + ensembl_id,
+            "id": "http://identifiers.org/ensembl/" + row['genomic_feature_ensembl_id'],
             "target_type": "http://identifiers.org/cttv.target/gene_evidence",
             "activity": "http://identifiers.org/cttv.activity/loss_of_function"
         },
@@ -112,7 +107,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hg
         },
         "type": "genetic_association",
         "variant": {
-            "id": "http://identifiers.org/dbsnp/" + db_snp_id,
+            "id": "http://identifiers.org/dbsnp/" + row['db_snp_id'],
             "type": "snp single"
         },
         "evidence": {
@@ -137,7 +132,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, ensembl_id, hg
                 "functional_consequence": functional_consequence
             },
             "variant2disease": {
-                "unique_experiment_reference": "STUDYID_" + sample_id,  # Required by regexp in base.json
+                "unique_experiment_reference": "STUDYID_" + row['sample_id'],  # Required by regexp in base.json
                 "is_associated": True,
                 "date_asserted": "2018-10-22T23:00:00",
                 "resource_score": {
