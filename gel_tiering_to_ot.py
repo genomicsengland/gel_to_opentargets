@@ -10,7 +10,7 @@ import re
 
 SOURCE_ID = "genomics_england_tiering"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
-DATABASE_ID = "genomics_england_tiering" # TODO Change to GEL Main Programme when working
+DATABASE_ID = "genomics_england_tiering"  # TODO Change to GEL Main Programme when working
 DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 
@@ -30,7 +30,8 @@ def main():
 
     logger.info("Reading TSV from " + args.input)
 
-    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id", "genomic_feature_hgnc", "consequence_type"]
+    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
+                        "genomic_feature_hgnc", "consequence_type"]
 
     count = 0
 
@@ -48,10 +49,14 @@ def main():
                 sys.exit(1)
 
         for row in reader:
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
-            if my_instance:
-                print(json.dumps(my_instance))
-                count += 1
+
+            # Some rows have several, comma-separated consequence types; split these out into separate rows
+            for consequence_type in row['consequence_type'].split(","):
+                row['consequence_type'] = consequence_type
+                my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
+                if my_instance:
+                    print(json.dumps(my_instance))
+                    count += 1
 
     logger.info("Processed %d objects" % count)
 
@@ -66,7 +71,8 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     if not re.match(SNP_REGEXP, row['db_snp_id']):
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
-                    "the list of allowed types, ignoring" % (row['sample_id'], row['genomic_feature_ensembl_id'], row['phenotype'], row['db_snp_id']))
+                    "the list of allowed types, ignoring" % (row['sample_id'], row['genomic_feature_ensembl_id'],
+                                                             row['phenotype'], row['db_snp_id']))
         return
 
     logger.debug("Building container object")
@@ -126,7 +132,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 "urls": [
                     {
                         "nice_name": "Sourced from Genomics England tiering data",
-                        "url": "https://www.genomicsengland.co.uk/" # TODO change for more specific URL
+                        "url": "https://www.genomicsengland.co.uk/"  # TODO change for more specific URL
                     }
                 ],
                 "functional_consequence": functional_consequence
@@ -151,7 +157,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 "urls": [
                     {
                         "nice_name": "Sourced from Genomics England tiering data",
-                        "url": "https://www.genomicsengland.co.uk/" # TODO change for more specific URL
+                        "url": "https://www.genomicsengland.co.uk/"  # TODO change for more specific URL
                     }
                 ]
             }
@@ -234,6 +240,7 @@ def tier_to_score(tier):
         score = 0
 
     return score
+
 
 if __name__ == '__main__':
     sys.exit(main())

@@ -3,4 +3,4 @@ ENSG00000187498	rs773791331	Proteinuric renal disease	tier1	splice_region_varian
 ENSG00000136068	rs544099876	Renal tubular acidosis	tier1	missense_variant	LP0000002_DNA_A01	FLNB
 ENSG00000122126	rs61752971	Epileptic encephalopathy	tier2	splice_region_variant	LP0000003_DNA_A01	OCRL
 ENSG00000123560	rs57975228	Mitochondrial disorders 	tier2	splice_region_variant	LP0000004_DNA_A01	PLP1
-ENSG00000198947	rs201341211	Dilated Cardiomyopathy	tier1	missense_variant	LP0000005_DNA_A01	DMD
+ENSG00000198947	rs201341211	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD
