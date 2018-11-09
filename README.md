@@ -1,6 +1,6 @@
 # Importing Genomics England data into Open Targets
 
-## gel_to_ot.py 
+## gel_to_ot.py
 
 Takes an input TSV (probably exported from the `tiering_data` table in LabKey) and generates JSON output (one object per line) which should be valid according to the [opentargets/validator](https://github.com/opentargets/validator).
 
@@ -21,4 +21,3 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 4. Strip the OnToma output to create a file (not actually required since `gel_to_ot.py` only uses first 2 fields
 
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
-
