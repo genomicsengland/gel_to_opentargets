@@ -13,6 +13,7 @@ PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_tiering"  # TODO Change to GEL Main Programme when working
 DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
+GEL_LINK_PREFIX = "https://opencga-embassy.gel.zone/iva/#browser/reopencga@100k_genomes_grch37_germline/RD37?gene="
 
 
 def main():
@@ -90,6 +91,8 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     ontology_term = phenotype_map[phenotype]
 
+    gel_link = GEL_LINK_PREFIX + row['db_snp_id']
+
     score = tier_to_score(row['tier'])
 
     obj = {
@@ -132,7 +135,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 "urls": [
                     {
                         "nice_name": "Sourced from Genomics England tiering data",
-                        "url": "https://www.genomicsengland.co.uk/"  # TODO change for more specific URL
+                        "url": gel_link
                     }
                 ],
                 "functional_consequence": functional_consequence
