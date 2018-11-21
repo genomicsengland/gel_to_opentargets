@@ -95,6 +95,8 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     score = tier_to_score(row['tier'])
 
+    clinical_significance = tier_to_clinical_significance(row['tier'])
+    
     obj = {
         "sourceID": SOURCE_ID,
         "access_level": "public",
@@ -162,7 +164,8 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                         "nice_name": "Sourced from Genomics England tiering data",
                         "url": "https://www.genomicsengland.co.uk/"  # TODO change for more specific URL
                     }
-                ]
+                ],
+                "clinical_significance": clinical_significance
             }
         }
     }
@@ -244,6 +247,24 @@ def tier_to_score(tier):
 
     return score
 
+
+def tier_to_clinical_significance(tier):
+
+    # See https://github.com/opentargets/json_schema/blob/master/src/evidence/genetics/variant2disease.json for values
+
+
+    tier = tier.lower()
+
+    if tier == "tier1":
+        cs = "Pathogenic"
+    elif tier == "tier2":
+        cs = "Likely pathogenic"
+    elif tier == "tier3":
+        cs = "association"
+    else:
+        cs = "association"
+
+    return cs
 
 if __name__ == '__main__':
     sys.exit(main())
