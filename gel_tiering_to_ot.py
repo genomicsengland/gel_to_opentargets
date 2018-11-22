@@ -32,7 +32,7 @@ def main():
     logger.info("Reading TSV from " + args.input)
 
     required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
-                        "genomic_feature_hgnc", "consequence_type"]
+                        "genomic_feature_hgnc", "consequence_type", "participant_id"]
 
     count = 0
 
@@ -96,7 +96,9 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
     score = tier_to_score(row['tier'])
 
     clinical_significance = tier_to_clinical_significance(row['tier'])
-    
+
+    nice_name = "Sourced from Genomics England tiering data, participant ID " + row['participant_id']
+
     obj = {
         "sourceID": SOURCE_ID,
         "access_level": "public",
@@ -136,7 +138,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 ],
                 "urls": [
                     {
-                        "nice_name": "Sourced from Genomics England tiering data",
+                        "nice_name": nice_name,
                         "url": gel_link
                     }
                 ],
@@ -161,8 +163,8 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 ],
                 "urls": [
                     {
-                        "nice_name": "Sourced from Genomics England tiering data",
-                        "url": "https://www.genomicsengland.co.uk/"  # TODO change for more specific URL
+                        "nice_name": nice_name,
+                        "url": gel_link
                     }
                 ],
                 "clinical_significance": clinical_significance
