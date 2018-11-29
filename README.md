@@ -26,7 +26,7 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 To run via Docker:
 
-`docker run gel_to_ot --input sample.tsv`
+`docker run gel_to_ot --input test_data.tsv`
 
 To rebuild the Docker image after changes:
 
