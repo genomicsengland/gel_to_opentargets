@@ -31,3 +31,7 @@ To run via Docker:
 To rebuild the Docker image after changes:
 
 `docker build -t gel_to_ot .`
+
+## Sample data
+
+Note that the data in `sample.tsv` is intended to be representative of the tiering data, but certain fields (e.g. participant_id are placeholders and are not taken from real data)
