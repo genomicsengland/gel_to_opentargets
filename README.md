@@ -32,6 +32,6 @@ To rebuild the Docker image after changes:
 
 `docker build -t gel_to_ot .`
 
-## Sample data
+## Test data
 
-Note that the data in `sample.tsv` is intended to be representative of the tiering data, but certain fields (e.g. participant_id are placeholders and are not taken from real data)
+Note that the data in `test_data.tsv` is intended to be representative of the tiering data, but certain fields (e.g. participant_id are placeholders and are not taken from real data)
