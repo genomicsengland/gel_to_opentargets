@@ -1,5 +1,5 @@
 FROM python:2.7-slim
-LABEL maintainer="glenn@docproc.com"
+LABEL maintainer="glenn.proctor@genomicsengland.co.uk"
 
 # currently no need to install additional dependencies or Python modules
 
