@@ -51,13 +51,14 @@ def main():
 
         for row in reader:
 
-            # Some rows have several, comma-separated consequence types; split these out into separate rows
-            for consequence_type in row['consequence_type'].split(","):
-                row['consequence_type'] = consequence_type
-                my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
-                if my_instance:
-                    print(json.dumps(my_instance))
-                    count += 1
+            # Some rows have several, comma-separated consequence types; only use one in this case
+            if ',' in row['consequence_type']:
+                row['consequence_type'] = row['consequence_type'].split(',')[0]
+
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
+            if my_instance:
+                print(json.dumps(my_instance))
+                count += 1
 
     logger.info("Processed %d objects" % count)
 
@@ -253,7 +254,6 @@ def tier_to_score(tier):
 def tier_to_clinical_significance(tier):
 
     # See https://github.com/opentargets/json_schema/blob/master/src/evidence/genetics/variant2disease.json for values
-
 
     tier = tier.lower()
 
