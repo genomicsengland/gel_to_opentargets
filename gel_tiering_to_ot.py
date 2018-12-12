@@ -13,8 +13,7 @@ PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_tiering"  # TODO Change to GEL Main Programme when working
 DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
-GEL_LINK_PREFIX = "https://opencga-embassy.gel.zone/iva/#browser/reopencga@100k_genomes_grch37_germline/RD37?gene="
-
+GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq="
 
 def main():
     parser = argparse.ArgumentParser(description='Generate Open Targets JSON from an input TSV file')
@@ -92,7 +91,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     ontology_term = phenotype_map[phenotype]
 
-    gel_link = GEL_LINK_PREFIX + row['db_snp_id']
+    gel_link = GEL_LINK_PREFIX + row['participant_id']
 
     score = tier_to_score(row['tier'])
 
