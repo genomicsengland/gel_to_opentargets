@@ -15,6 +15,7 @@ DATABASE_VERSION = "1.0"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq="
 
+
 def main():
     parser = argparse.ArgumentParser(description='Generate Open Targets JSON from an input TSV file')
 
@@ -31,7 +32,7 @@ def main():
     logger.info("Reading TSV from " + args.input)
 
     required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
-                        "genomic_feature_hgnc", "consequence_type", "participant_id"]
+                        "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type"]
 
     count = 0
 
@@ -69,6 +70,10 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
     """
 
     logger = logging.getLogger(__name__)
+
+    # Filter out non-proband entries
+    if row['participant_type'].lower() != 'proband':
+        return
 
     if not re.match(SNP_REGEXP, row['db_snp_id']):
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
@@ -267,6 +272,7 @@ def tier_to_clinical_significance(tier):
         cs = "association"
 
     return cs
+
 
 if __name__ == '__main__':
     sys.exit(main())
