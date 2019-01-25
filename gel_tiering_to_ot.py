@@ -105,6 +105,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
         "validated_against_schema_version": "1.2.8",
         "unique_association_fields": {
             "sample_id": row['sample_id'],
+            "participant_id": row['participant_id'],
             "gene": row['genomic_feature_ensembl_id'],
             "phenotype": phenotype,
             "variant": row['db_snp_id']
