@@ -97,7 +97,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     clinical_significance = tier_to_clinical_significance(row['tier'])
 
-    nice_name = "Sourced from Genomics England tiering data, participant ID " + row['participant_id']
+    nice_name = "Genomics England tiering, participant " + row['participant_id']
 
     obj = {
         "sourceID": SOURCE_ID,
