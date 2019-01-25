@@ -253,7 +253,7 @@ def tier_to_score(tier):
 
 def tier_to_clinical_significance(tier):
 
-    # See https://github.com/opentargets/json_schema/blob/master/src/evidence/genetics/variant2disease.json for values
+    # See https://github.com/opentargets/json_schema/blob/master/opentargets.json for values
 
     tier = tier.lower()
 
