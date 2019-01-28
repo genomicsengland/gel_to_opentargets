@@ -260,12 +260,13 @@ def tier_to_clinical_significance(tier):
 
     # See https://github.com/opentargets/json_schema/blob/master/opentargets.json for values
 
+    # Setting all to "association" on advice from internal experts
     tier = tier.lower()
 
     if tier == "tier1":
-        cs = "Pathogenic"
+        cs = "association"
     elif tier == "tier2":
-        cs = "Likely pathogenic"
+        cs = "association"
     elif tier == "tier3":
         cs = "association"
     else:
