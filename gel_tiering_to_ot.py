@@ -34,7 +34,8 @@ def main():
     logger.info("Reading TSV from " + args.input)
 
     required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
-                        "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type"]
+                        "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type",
+                        "genotype", "mode_of_inheritance"]
 
     count = 0
 
@@ -59,7 +60,7 @@ def main():
             if ',' in row['consequence_type']:
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, row)
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -67,7 +68,7 @@ def main():
     logger.info("Processed %d objects" % count)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, row):
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -106,7 +107,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
 
     clinical_significance = tier_to_clinical_significance(row['tier'])
 
-    nice_name = "Genomics England tiering, participant " + row['participant_id']
+    link_text = build_link_text(row, affected_map)
 
     obj = {
         "sourceID": SOURCE_ID,
@@ -148,7 +149,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 ],
                 "urls": [
                     {
-                        "nice_name": nice_name,
+                        "nice_name": link_text,
                         "url": gel_link
                     }
                 ],
@@ -173,7 +174,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, row):
                 ],
                 "urls": [
                     {
-                        "nice_name": nice_name,
+                        "nice_name": link_text,
                         "url": gel_link
                     }
                 ],
@@ -299,9 +300,23 @@ def build_affected_map(filename):
             if not row['affection_status']:
                 continue
 
-            print row['member_participant_id'] + ' ' + row['affection_status']
+            affected_map[row['member_participant_id']] = row['affection_status'].lower()
 
     return affected_map
+
+
+def build_link_text(row, affected_map):
+    '''
+    Build text that is displayed on participant link
+    :param row: dict of columns in current evidence line
+    :return: String of text
+    '''
+    id = row['participant_id']
+
+    text = "GEL tiering participant %s %s %s %s %s" % \
+           (id, affected_map[id],row['tier'], row['genotype'], row['mode_of_inheritance'])
+
+    return text
 
 
 if __name__ == '__main__':
