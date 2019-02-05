@@ -36,7 +36,7 @@ def main():
 
     required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
                         "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type",
-                        "genotype", "mode_of_inheritance"]
+                        "genotype", "mode_of_inheritance", "rare_diseases_family_id"]
 
     count = 0
 
@@ -103,11 +103,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     gel_link = GEL_LINK_PREFIX + row['participant_id']
 
+    link_text = build_link_text(row, affected_map)
+
     score = tier_to_score(row['tier'])
 
     clinical_significance = tier_to_clinical_significance(row['tier'])
 
-    link_text = build_link_text(row, affected_map)
 
     obj = {
         "sourceID": SOURCE_ID,
@@ -313,8 +314,8 @@ def build_link_text(row, affected_map):
     '''
     id = row['participant_id']
 
-    text = "GEL tiering participant %s %s %s %s %s" % \
-           (id, affected_map[id],row['tier'], row['mode_of_inheritance'], row['genotype'])
+    text = "GEL tiering participant %s family %s %s %s %s %s" % \
+           (id, row['rare_diseases_family_id'], affected_map[id], row['tier'], row['mode_of_inheritance'], row['genotype'])
 
     return text
 
