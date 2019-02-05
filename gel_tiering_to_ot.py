@@ -19,7 +19,9 @@ GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main
 def main():
     parser = argparse.ArgumentParser(description='Generate Open Targets JSON from an input TSV file')
 
-    parser.add_argument('--input', help="TSV input file", required=True, action='store')
+    parser.add_argument('--input', help="Tiering data TSV input file", required=True, action='store')
+
+    parser.add_argument('--pedigree', help="Pedigree data TSV input file", required=True, action='store')
 
     parser.add_argument("--log-level", help="Set the log level", action='store', default='WARNING')
 
@@ -38,6 +40,8 @@ def main():
 
     consequence_map = build_consequence_type_to_so_map()
     phenotype_map = read_phenotype_to_efo_mapping(PHENOTYPE_MAPPING_FILE)
+
+    affected_map = build_affected_map(args.pedigree)
 
     with open(args.input) as tsv_file:
 
@@ -272,6 +276,32 @@ def tier_to_clinical_significance(tier):
         cs = "association"
 
     return cs
+
+
+def build_affected_map(filename):
+
+    ''' Parse pedigree file to build a map of affected/unaffected status for each participant.
+    Returns:
+        Dict of particpant ID, afected status
+    '''
+
+    affected_map = dict()
+
+    with open(filename) as pedigree_file:
+
+        reader = csv.DictReader(pedigree_file, delimiter='\t')
+
+        for row in reader:
+
+            if not row['member_participant_id']:
+                continue
+
+            if not row['affection_status']:
+                continue
+
+            print row['member_participant_id'] + ' ' + row['affection_status']
+
+    return affected_map
 
 
 if __name__ == '__main__':

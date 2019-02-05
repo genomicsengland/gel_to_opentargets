@@ -22,11 +22,17 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
 
+1. Extract the `rare_diseases_pedigree_member` table from LabKey and save as a TSV. This is used to determine affected/unaffected status.
+
+## Usage
+
+`python gel_tiering_to_ot.py --input sample.tsv --pedigree sample_pedigree.tsv`
+
 ## Docker
 
 To run via Docker:
 
-`docker run gel_to_ot --input test_data.tsv`
+`docker run gel_to_ot --input test_data.tsv --pedigree sample_pedigree.tsv`
 
 To rebuild the Docker image after changes:
 
