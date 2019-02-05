@@ -24,6 +24,10 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 1. Extract the `rare_diseases_pedigree_member` table from LabKey and save as a TSV. This is used to determine affected/unaffected status.
 
+### Novel variants
+
+Currently the Open Targets schema requires that all genetic associations have variants with a dbSNP rsID assigned. This is not possible in the case of novel variants. As a workaround, placeholder rsIDs, starting at rs2000000000 are assigned to novel variants during the import process.
+
 ## Usage
 
 `python gel_tiering_to_ot.py --input sample.tsv --pedigree sample_pedigree.tsv`

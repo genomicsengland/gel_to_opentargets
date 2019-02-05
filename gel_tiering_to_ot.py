@@ -7,14 +7,15 @@ import json
 import logging
 import sys
 import re
+import itertools
 
 SOURCE_ID = "genomics_england_tiering"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
-DATABASE_ID = "genomics_england_tiering"  # TODO Change to GEL Main Programme when working
-DATABASE_VERSION = "1.0"  # Change if version changes
+DATABASE_ID = "genomics_england_main_programme"
+DATABASE_VERSION = "5.1"  # Change if version changes
 SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq="
-
+FAKE_RS_ID_BASE = 2000000000  # Number to start fake rsIDs at
 
 def main():
     parser = argparse.ArgumentParser(description='Generate Open Targets JSON from an input TSV file')
@@ -44,6 +45,8 @@ def main():
 
     affected_map = build_affected_map(args.pedigree)
 
+    fake_rs_counter = itertools.count(start=FAKE_RS_ID_BASE)
+
     with open(args.input) as tsv_file:
 
         reader = csv.DictReader(tsv_file, delimiter='\t')
@@ -60,7 +63,7 @@ def main():
             if ',' in row['consequence_type']:
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row)
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -68,7 +71,7 @@ def main():
     logger.info("Processed %d objects" % count)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row):
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -76,15 +79,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     logger = logging.getLogger(__name__)
 
-    # Filter out non-proband entries
-    if row['participant_type'].lower() != 'proband':
-        return
-
     if not re.match(SNP_REGEXP, row['db_snp_id']):
+        original_rsID = row['db_snp_id']
+        row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
-                    "the list of allowed types, ignoring" % (row['sample_id'], row['genomic_feature_ensembl_id'],
-                                                             row['phenotype'], row['db_snp_id']))
-        return
+               "the list of allowed types, so generating fake rsID %s" % (row['sample_id'], row['genomic_feature_ensembl_id'],
+                                                        row['phenotype'], original_rsID, row['db_snp_id']))
 
     logger.debug("Building container object")
 
@@ -314,10 +314,15 @@ def build_link_text(row, affected_map):
     id = row['participant_id']
 
     text = "GEL tiering participant %s %s %s %s %s" % \
-           (id, affected_map[id],row['tier'], row['genotype'], row['mode_of_inheritance'])
+           (id, affected_map[id],row['tier'], row['mode_of_inheritance'], row['genotype'])
 
     return text
 
+def assign_fake_rsid():
+    '''
+    Assign a fake rsID, starting from a
+    :return:
+    '''
 
 if __name__ == '__main__':
     sys.exit(main())
