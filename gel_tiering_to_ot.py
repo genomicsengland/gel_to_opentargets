@@ -321,7 +321,7 @@ def build_link_text(row, affected_map):
     else:
         affected = "unknown"
 
-    text = "GeL {tier} {genotype} variant for family {family}; participant {participant} ({affected}) is {mode}" .format(
+    text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}" .format(
         tier = row['tier'],
         genotype = row['genotype'],
         family = row['rare_diseases_family_id'],
