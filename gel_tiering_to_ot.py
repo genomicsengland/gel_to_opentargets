@@ -69,6 +69,7 @@ def main():
                 count += 1
 
     logger.info("Processed %d objects" % count)
+    logger.info("Generated synthetic rsIDs for %d entries" % (fake_rs_counter.next() - FAKE_RS_ID_BASE))
 
 
 def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter):
@@ -314,8 +315,13 @@ def build_link_text(row, affected_map):
     '''
     id = row['participant_id']
 
+    if id in affected_map:
+        affected = affected_map[id]
+    else:
+        affected = "unknown"
+
     text = "GEL tiering participant %s family %s %s %s %s %s" % \
-           (id, row['rare_diseases_family_id'], affected_map[id], row['tier'], row['mode_of_inheritance'], row['genotype'])
+           (id, row['rare_diseases_family_id'], affected, row['tier'], row['mode_of_inheritance'], row['genotype'])
 
     return text
 
