@@ -40,6 +40,8 @@ def main():
 
     count = 0
 
+    unknown_phenotypes = set()
+
     consequence_map = build_consequence_type_to_so_map()
     phenotype_map = read_phenotype_to_efo_mapping(PHENOTYPE_MAPPING_FILE)
 
@@ -63,16 +65,19 @@ def main():
             if ',' in row['consequence_type']:
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter)
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
 
     logger.info("Processed %d objects" % count)
     logger.info("Generated synthetic rsIDs for %d entries" % (fake_rs_counter.next() - FAKE_RS_ID_BASE))
+    logger.info("%d phenotypes were not found:" % len(unknown_phenotypes))
+    for phenotype in unknown_phenotypes:
+        logger.info(phenotype)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter):
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -97,7 +102,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     phenotype = row['phenotype'].strip()
     if phenotype not in phenotype_map:
-        logger.error("Can't find phenotype mapping for %s, skipping this row" % phenotype)
+        unknown_phenotypes.add(phenotype)
         return
 
     ontology_term = phenotype_map[phenotype]
@@ -316,10 +321,7 @@ def build_link_text(row, affected_map):
     '''
     id = row['participant_id']
 
-    if id in affected_map:
-        affected = affected_map[id]
-    else:
-        affected = "unknown"
+    affected = affected_map.get(id, "unknown")
 
     text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}" .format(
         tier = row['tier'],

@@ -4,6 +4,6 @@ ENSG00000136068	rs544099876	Renal tubular acidosis	tier1	missense_variant	LP0000
 ENSG00000122126	rs61752971	Epileptic encephalopathy	tier2	splice_region_variant	LP0000003_DNA_A01	OCRL	1236	Proband	reference_homozygous	monoallelic_not_imprinted	1234
 ENSG00000123560	.	Mitochondrial disorders	tier2	splice_region_variant	LP0000004_DNA_A01	PLP1	1111	Proband	alternate_homozygous	xlinked_monoalleic	545655
 ENSG00000198947	.	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	35356547
-ENSG00000198947	rs201341211	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334235	Proband	reference_homozygous	xlinked_monoallelic	546525
+ENSG00000198947	rs201341211	Unknown phenotype 1	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	9999	Proband	reference_homozygous	xlinked_monoallelic	546525
 ENSG00000198947	.	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	4879898
-ENSG00000198947	.	Hypertension	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	78998
+ENSG00000198947	.	Unknown phenotype 2	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	78998
