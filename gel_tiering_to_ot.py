@@ -41,6 +41,7 @@ def main():
     count = 0
 
     unknown_phenotypes = set()
+    unknown_consequences = set()
 
     consequence_map = build_consequence_type_to_so_map()
     phenotype_map = read_phenotype_to_efo_mapping(PHENOTYPE_MAPPING_FILE)
@@ -65,7 +66,7 @@ def main():
             if ',' in row['consequence_type']:
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes)
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes, unknown_consequences)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -75,9 +76,11 @@ def main():
     logger.info("%d phenotypes were not found:" % len(unknown_phenotypes))
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
+    logger.info("%d consequences were not found:" % len(unknown_consequences))
+    for consequence in unknown_consequences:
+        logger.info(consequence)
 
-
-def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes):
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes, unknown_consequences):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -95,7 +98,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
     logger.debug("Building container object")
 
     if row['consequence_type'] not in consequence_map:
-        logger.error("Can't find consequence type mapping for %s, skipping this row" % row['consequence_type'])
+        unknown_consequences.add(row['consequence_type'])
         return
 
     functional_consequence = consequence_map[row['consequence_type']]
