@@ -17,6 +17,7 @@ SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
 GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq="
 FAKE_RS_ID_BASE = 2000000000  # Number to start fake rsIDs at
 
+
 def main():
     parser = argparse.ArgumentParser(description='Generate Open Targets JSON from an input TSV file')
 
@@ -66,7 +67,8 @@ def main():
             if ',' in row['consequence_type']:
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
-            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes, unknown_consequences)
+            my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row,
+                                                        fake_rs_counter, unknown_phenotypes, unknown_consequences)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -80,7 +82,9 @@ def main():
     for consequence in unknown_consequences:
         logger.info(consequence)
 
-def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter, unknown_phenotypes, unknown_consequences):
+
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter,
+                                  unknown_phenotypes, unknown_consequences):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -89,11 +93,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
     logger = logging.getLogger(__name__)
 
     if not re.match(SNP_REGEXP, row['db_snp_id']):
-        original_rsID = row['db_snp_id']
+        original_rsid = row['db_snp_id']
         row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
-               "the list of allowed types, so generating fake rsID %s" % (row['sample_id'], row['genomic_feature_ensembl_id'],
-                                                        row['phenotype'], original_rsID, row['db_snp_id']))
+                    "the list of allowed types, so generating fake rsID %s" % (
+                        row['sample_id'], row['genomic_feature_ensembl_id'],
+                        row['phenotype'], original_rsid, row['db_snp_id']))
 
     logger.debug("Building container object")
 
@@ -117,7 +122,6 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
     score = tier_to_score(row['tier'])
 
     clinical_significance = tier_to_clinical_significance(row['tier'])
-
 
     obj = {
         "sourceID": SOURCE_ID,
@@ -256,7 +260,6 @@ def read_phenotype_to_efo_mapping(filename):
 
 
 def tier_to_score(tier):
-
     tier = tier.lower()
 
     if tier == "tier1":
@@ -272,7 +275,6 @@ def tier_to_score(tier):
 
 
 def tier_to_clinical_significance(tier):
-
     # See https://github.com/opentargets/json_schema/blob/master/opentargets.json for values
 
     tier = tier.lower()
@@ -290,11 +292,10 @@ def tier_to_clinical_significance(tier):
 
 
 def build_affected_map(filename):
-
-    ''' Parse pedigree file to build a map of affected/unaffected status for each participant.
-    Returns:
-        Dict of particpant ID, afected status
-    '''
+    """
+    Parse pedigree file to build a map of affected/unaffected status for each participant.
+    Returns: Dict of particpant ID, afected status
+    """
 
     affected_map = dict()
 
@@ -316,31 +317,27 @@ def build_affected_map(filename):
 
 
 def build_link_text(row, affected_map):
-    '''
+    """
     Build text that is displayed on participant link, e.g.
     GeL TIER2  monoallelic_not_imprinted variant for family G105275; participant 113001766 (affected) is heterozygous.
     :param row: dict of columns in current evidence line
+    :param affected_map: dict of participant_id:affected status
     :return: String of text
-    '''
-    id = row['participant_id']
+    """
+    pid = row['participant_id']
 
-    affected = affected_map.get(id, "unknown")
+    affected = affected_map.get(pid, "unknown")
 
-    text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}" .format(
-        tier = row['tier'],
-        genotype = row['genotype'],
-        family = row['rare_diseases_family_id'],
-        participant = id,
-        affected = affected,
-        mode = row['mode_of_inheritance'])
+    text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
+        tier=row['tier'],
+        genotype=row['genotype'],
+        family=row['rare_diseases_family_id'],
+        participant=pid,
+        affected=affected,
+        mode=row['mode_of_inheritance'])
 
     return text
 
-def assign_fake_rsid():
-    '''
-    Assign a fake rsID, starting from a
-    :return:
-    '''
 
 if __name__ == '__main__':
     sys.exit(main())
