@@ -309,7 +309,8 @@ def build_affected_map(filename):
 
 def build_link_text(row, affected_map):
     '''
-    Build text that is displayed on participant link
+    Build text that is displayed on participant link, e.g.
+    GeL TIER2  monoallelic_not_imprinted variant for family G105275; participant 113001766 (affected) is heterozygous.
     :param row: dict of columns in current evidence line
     :return: String of text
     '''
@@ -320,8 +321,13 @@ def build_link_text(row, affected_map):
     else:
         affected = "unknown"
 
-    text = "GEL tiering participant %s family %s %s %s %s %s" % \
-           (id, row['rare_diseases_family_id'], affected, row['tier'], row['mode_of_inheritance'], row['genotype'])
+    text = "GeL {tier} {genotype} variant for family {family}; participant {participant} ({affected}) is {mode}" .format(
+        tier = row['tier'],
+        genotype = row['genotype'],
+        family = row['rare_diseases_family_id'],
+        participant = id,
+        affected = affected,
+        mode = row['mode_of_inheritance'])
 
     return text
 
