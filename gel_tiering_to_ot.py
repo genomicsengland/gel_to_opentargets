@@ -92,8 +92,10 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     logger = logging.getLogger(__name__)
 
+    novel_snp = False
     if not re.match(SNP_REGEXP, row['db_snp_id']):
         original_rsid = row['db_snp_id']
+        novel_snp = True
         row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
                     "the list of allowed types, so generating fake rsID %s" % (
@@ -117,7 +119,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     gel_link = GEL_LINK_PREFIX + row['participant_id']
 
-    link_text = build_link_text(row, affected_map)
+    link_text = build_link_text(row, affected_map, novel_snp)
 
     score = tier_to_score(row['tier'])
 
@@ -316,21 +318,23 @@ def build_affected_map(filename):
     return affected_map
 
 
-def build_link_text(row, affected_map):
+def build_link_text(row, affected_map, novel_snp):
     """
     Build text that is displayed on participant link, e.g.
     GeL TIER2  monoallelic_not_imprinted variant for family G105275; participant 113001766 (affected) is heterozygous.
     :param row: dict of columns in current evidence line
     :param affected_map: dict of participant_id:affected status
+    :param novel_snp: whether this SNP is novel or not
     :return: String of text
     """
     pid = row['participant_id']
 
     affected = affected_map.get(pid, "unknown")
 
-    text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
+    text = "GeL {tier} {mode} {snp_status} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
         tier=row['tier'],
         genotype=row['genotype'],
+        snp_status="novel" if novel_snp else "known",
         family=row['rare_diseases_family_id'],
         participant=pid,
         affected=affected,
