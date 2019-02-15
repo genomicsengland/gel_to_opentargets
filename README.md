@@ -22,7 +22,9 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
 
-1. Extract the `rare_diseases_pedigree_member` table from LabKey and save as a TSV. This is used to determine affected/unaffected status.
+## Pedigree
+
+Extract the `rare_diseases_pedigree_member` table from LabKey and save as a TSV. This is used to determine affected/unaffected status.
 
 ### Novel variants
 
