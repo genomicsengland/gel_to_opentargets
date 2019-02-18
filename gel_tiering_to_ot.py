@@ -46,6 +46,7 @@ def main():
 
     consequence_map = build_consequence_type_to_so_map()
     phenotype_map = read_phenotype_to_efo_mapping(PHENOTYPE_MAPPING_FILE)
+    apply_phenotype_mapping_overrides(phenotype_map)
 
     affected_map = build_affected_map(args.pedigree)
 
@@ -259,6 +260,13 @@ def read_phenotype_to_efo_mapping(filename):
                 phenotype_map[phenotype] = ontology_term
 
     return phenotype_map
+
+
+def apply_phenotype_mapping_overrides(phenotype_map):
+    phenotype_map["Early onset and familial Parkinson's Disease"] = "http://www.ebi.ac.uk/efo/EFO_0002508"
+    phenotype_map["Early onset and familial Parkinson%#27;s Disease"] = "http://www.ebi.ac.uk/efo/EFO_0002508"
+    phenotype_map["early onset and familial parkinsons disease"] = "http://www.ebi.ac.uk/efo/EFO_0002508"
+    return
 
 
 def tier_to_score(tier):
