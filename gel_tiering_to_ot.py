@@ -341,12 +341,12 @@ def build_link_text(row, affected_map, novel_snp):
 
     text = "GeL {tier} {mode} {snp_status} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
         tier=row['tier'],
-        genotype=row['genotype'],
+        genotype=row['genotype'].replace('_', ' '),
         snp_status="novel" if novel_snp else "known",
         family=row['rare_diseases_family_id'],
         participant=pid,
         affected=affected,
-        mode=row['mode_of_inheritance'])
+        mode=row['mode_of_inheritance'].replace('_', ' '))
 
     return text
 
