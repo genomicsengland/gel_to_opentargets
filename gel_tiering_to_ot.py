@@ -287,18 +287,8 @@ def tier_to_score(tier):
 def tier_to_clinical_significance(tier):
     # See https://github.com/opentargets/json_schema/blob/master/opentargets.json for values
 
-    tier = tier.lower()
-
-    if tier == "tier1":
-        cs = "Pathogenic"
-    elif tier == "tier2":
-        cs = "Likely pathogenic"
-    elif tier == "tier3":
-        cs = "association"
-    else:
-        cs = "association"
-
-    return cs
+    # for the tiering data we can only infer an association, not whether it's pathogenic or not
+    return "association"
 
 
 def build_affected_map(filename):
