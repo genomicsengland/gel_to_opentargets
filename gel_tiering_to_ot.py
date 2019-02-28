@@ -35,7 +35,7 @@ def main():
 
     logger.info("Reading TSV from " + args.input)
 
-    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "genomic_feature_ensembl_id",
+    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "ensembl_id",
                         "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type",
                         "genotype", "mode_of_inheritance", "rare_diseases_family_id"]
 
