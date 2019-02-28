@@ -311,7 +311,7 @@ def build_affected_map(filename):
             if not row['affection_status']:
                 continue
 
-            affected_map[row['member_participant_id']] = row['affection_status'].lower()
+            affected_map[row['participant_id']] = row['affection_status'].lower()
 
     return affected_map
 
