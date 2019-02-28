@@ -100,7 +100,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
         row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
         logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
                     "the list of allowed types, so generating fake rsID %s" % (
-                        row['sample_id'], row['genomic_feature_ensembl_id'],
+                        row['sample_id'], row['ensembl_id'],
                         row['phenotype'], original_rsid, row['db_snp_id']))
 
     logger.debug("Building container object")
@@ -133,12 +133,12 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
         "unique_association_fields": {
             "sample_id": row['sample_id'],
             "participant_id": row['participant_id'],
-            "gene": row['genomic_feature_ensembl_id'],
+            "gene": row['ensembl_id'],
             "phenotype": phenotype,
             "variant": row['db_snp_id']
         },
         "target": {
-            "id": "http://identifiers.org/ensembl/" + row['genomic_feature_ensembl_id'],
+            "id": "http://identifiers.org/ensembl/" + row['ensembl_id'],
             "target_type": "http://identifiers.org/cttv.target/gene_evidence",
             "activity": "http://identifiers.org/cttv.activity/loss_of_function"
         },
