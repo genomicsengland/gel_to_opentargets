@@ -22,7 +22,7 @@ Takes an input TSV (probably exported from the `tiering_data` table in LabKey) a
 
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
 
-5. Note that there are some manual phenotype mappings in 
+5. Note that there are some manual phenotype mappings in `gel_tiering_to_ot.py`
 
 ## Pedigree
 
