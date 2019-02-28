@@ -98,12 +98,10 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
         original_rsid = row['db_snp_id']
         novel_snp = True
         row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
-        logger.info("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
+        logger.debug("Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match "
                     "the list of allowed types, so generating fake rsID %s" % (
                         row['sample_id'], row['ensembl_id'],
                         row['phenotype'], original_rsid, row['db_snp_id']))
-
-    logger.debug("Building container object")
 
     if row['consequence_type'] not in consequence_map:
         unknown_consequences.add(row['consequence_type'])
