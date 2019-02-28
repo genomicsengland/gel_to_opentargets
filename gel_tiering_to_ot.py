@@ -305,7 +305,7 @@ def build_affected_map(filename):
 
         for row in reader:
 
-            if not row['member_participant_id']:
+            if not row['participant_id']:
                 continue
 
             if not row['affection_status']:
