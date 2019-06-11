@@ -1,5 +1,5 @@
-# Take a TSV file of exist questionnaire data exported from LabKey and convert it to JSON following the OpenTargets "genetic association" schema
-# https://github.com/opentargets/json_schema
+# Take a TSV file of exit questionnaire data exported from LabKey and convert it to JSON following
+# the OpenTargets "genetic association" schema https://github.com/opentargets/json_schema
 
 import argparse
 import csv
@@ -12,7 +12,8 @@ SOURCE_ID = "genomics_england_questionnaire"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
 DATABASE_VERSION = "6"  # Change if version changes
-GEL_LINK_PREFIX = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq="  # TODO link to questionnaire table
+ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
+LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}"
 
 
 def main():
@@ -32,7 +33,7 @@ def main():
     logger.setLevel(logging.getLevelName(args.log_level))
 
     required_columns = ["participant_id", "family_id", "phenotypes_explained", "variant_details",
-                        "acmg_classification"]  # TODO more required columns
+                        "acmg_classification", "actionability", "case_solved_family"]
 
     count = 0
 
@@ -46,8 +47,6 @@ def main():
     logger.debug('Read {} variant:gene mappings'.format(len(variant_to_gene)))
 
     unknown_variants = set()
-
-    sys.exit(0)
 
     logger.info("Reading TSV from " + args.input)
 
@@ -71,12 +70,10 @@ def main():
                 count += 1
 
     logger.info("Processed {} objects".format(count))
-    logger.info("{} phenotypes were not found:".format(len(unknown_phenotypes))
-                for phenotype in unknown_phenotypes:
-    logger.info(phenotype)
-    logger.info("{} variants were could not be mapped to genes and were skipped:".format(len(unknown_variants)))
-
-    # TODO can this be moved to common?
+    logger.info("{} phenotypes were not found:".format(len(unknown_phenotypes)))
+    for phenotype in unknown_phenotypes:
+        logger.info(phenotype)
+    logger.info("{} variants could not be mapped to genes and were skipped:".format(len(unknown_variants)))
 
 
 def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene, unknown_variants):
@@ -87,6 +84,8 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     logger = logging.getLogger(__name__)
 
+    participant_id = row['participant_id']
+
     phenotype = row['phenotypes_explained'].strip()
     if phenotype not in phenotype_map:
         unknown_phenotypes.add(phenotype)
@@ -94,30 +93,29 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     ontology_term = phenotype_map[phenotype]
 
-    gel_link = GEL_LINK_PREFIX + row['participant_id']
+    score = 1  # TODO different score based on positibve or negative result - e.g. 0 or skip entirely if phenotypes_solved is "no"?
 
-    link_text = build_link_text(row, affected_map, novel_snp)
-
-    score = 1  # TODO different scores?
-
-    clinical_significance = tier_to_clinical_significance(row['tier'])
+    clinical_significance = row['acmg_classification']  # TODO check if it's in the allowed enum
 
     variant = row['variant_details']
-    gene = variant_to_gene(variant)
+    gene = variant_to_gene[variant]
     if not gene:
         logger.error("No gene found for variant {}".format(variant))
         unknown_variants.add()
         return
+
+    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id)
+
+    link_text = build_link_text(row)
 
     # TODO think about unique association fields
 
     obj = {
         "sourceID": SOURCE_ID,
         "access_level": "public",
-        "validated_against_schema_version": "1.2.8", # TODO change
+        "validated_against_schema_version": "1.6.0",
         "unique_association_fields": {
-            "sample_id": row['sample_id'],
-            "participant_id": row['participant_id'],
+            "participant_id": participant_id,
             "gene": gene,
             "phenotype": phenotype,
             "variant": variant
@@ -133,13 +131,13 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
         },
         "type": "genetic_association",
         "variant": {
-            "id": variant,  # TODO this won't validate
+            "id": variant,  # TODO wil this validate?
             "type": "snp single"
         },
         "evidence": {
             "gene2variant": {
                 "is_associated": True,
-                "date_asserted": "2018-10-22T23:00:00",  # TODO get date from table? Set in constant section above?
+                "date_asserted": ASSERTION_DATE,
                 "provenance_type": {
                     "database": {
                         "id": DATABASE_ID,
@@ -154,13 +152,14 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
                         "nice_name": link_text,
                         "url": gel_link
                     }
-                ],
-                "functional_consequence": functional_consequence
+                ]
+                # functional consequence goes here if needed
             },
             "variant2disease": {
-                "unique_experiment_reference": "STUDYID_" + row['sample_id'],  # Required by regexp in base.json
+                # TODO check that this is actually unique
+                "unique_experiment_reference": participant_id + variant + phenotype,
                 "is_associated": True,
-                "date_asserted": "2018-10-22T23:00:00",  # TODO get date from table? Set in constant section above?
+                "date_asserted": ASSERTION_DATE,
                 "resource_score": {
                     "type": "probability",
                     "value": score
@@ -188,22 +187,23 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
     return obj
 
 
-# TODO modify for questionnaire
 def build_link_text(row):
     """
     Build text that is displayed on participant link, e.g.
-    GeL TIER2  monoallelic_not_imprinted variant for family G105275; participant 113001766 (affected) is heterozygous.
-    :param row: dict of columns in current evidence line
+    GeL variant for family 1234, participant 4567 case solved, actionable (pathogenic variant)
     :return: String of text
     """
-    pid = row['participant_id']
 
-    text = "GeL {tier} {mode} {snp_status} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
-        tier=row['tier'],
-        genotype=row['genotype'].replace('_', ' '),
-        family=row['rare_diseases_family_id'],
-        participant=pid,
-        mode=row['mode_of_inheritance'].replace('_', ' '))
+    case_solved = "case solved" if row['case_solved_family'] == 'yes' else 'case not solved'
+    actionable = "actionable" if row['actionability'] == 'yes' else 'not actionable'
+    classification = row['acmg_classification'].replace('_', ' ')
+
+    text = "GeL variant for family {family}; participant {participant} {solved} {actionable} ({classification})".format(
+        family = row['family_id'],
+        participant = row['participant_id'],
+        solved = case_solved,
+        actionable = actionable,
+        classification = classification)
 
     return text
 
