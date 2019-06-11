@@ -1,11 +1,11 @@
-FROM cs-prod-tools-artifactory-01.gel.zone:5003/python:2.7-slim
-LABEL maintainer="glenn.proctor@genomicsengland.co.uk"
+FROM python:2.7-slim
 
 # currently no need to install additional dependencies or Python modules
 
 # put the application in the right place
+# Copy files explicitly to avoid accidentally including test data in image
 WORKDIR /usr/src/app
-COPY . /usr/src/app
+COPY ./gel*.py /usr/src/app/
 
 # point to the entrypoint script
 ENTRYPOINT [ "python", "gel_tiering_to_ot.py" ]
