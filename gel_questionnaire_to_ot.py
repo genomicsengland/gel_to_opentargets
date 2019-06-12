@@ -100,7 +100,7 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
     variant = row['variant_details']
     if variant not in variant_to_gene:
         logger.error("No gene found for variant {}".format(variant))
-        unknown_variants.add()
+        unknown_variants.add(variant)
         return
     else:
         gene = variant_to_gene[variant]
