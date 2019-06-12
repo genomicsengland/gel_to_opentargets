@@ -14,6 +14,7 @@ DATABASE_ID = "genomics_england_main_programme"
 DATABASE_VERSION = "6"  # Change if version changes
 ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
 LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}&query.phenotypes_explained~eq={phenotype}"
+SCHEMA_VERSION = "1.6.0"  # Open Targets JSON schema version
 
 
 def main():
@@ -95,9 +96,9 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     ontology_term = phenotype_map[phenotype]
 
-    score = 1  # TODO different score based on positibve or negative result - e.g. 0 or skip entirely if phenotypes_solved is "no"?
+    score = 1  # TODO different score based on positive or negative result - e.g. 0 or skip entirely if phenotypes_solved is "no"?
 
-    clinical_significance = row['acmg_classification']  # TODO check if it's in the allowed enum
+    clinical_significance = row['acmg_classification']
 
     variant = row['variant_details']
     if variant not in variant_to_gene:
@@ -106,17 +107,15 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
     else:
         gene = variant_to_gene[variant]
 
-    # Link to Labkey based on participant, variant and phenotype
+    # Link to LabKey based on participant, variant and phenotype
     gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id, phenotype=phenotype)
 
     link_text = build_link_text(row)
 
-    # TODO think about unique association fields
-
     obj = {
         "sourceID": SOURCE_ID,
         "access_level": "public",
-        "validated_against_schema_version": "1.6.0",
+        "validated_against_schema_version": SCHEMA_VERSION,
         "unique_association_fields": {
             "participant_id": participant_id,
             "gene": gene,
@@ -134,7 +133,7 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
         },
         "type": "genetic_association",
         "variant": {
-            "id": variant,  # TODO wil this validate?
+            "id": variant,
             "type": "snp single"
         },
         "evidence": {
@@ -156,7 +155,6 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
                         "url": gel_link
                     }
                 ]
-                # functional consequence goes here if needed
             },
             "variant2disease": {
                 # TODO check that this is actually unique
