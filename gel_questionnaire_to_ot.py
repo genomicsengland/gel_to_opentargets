@@ -98,11 +98,12 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
     clinical_significance = row['acmg_classification']  # TODO check if it's in the allowed enum
 
     variant = row['variant_details']
-    gene = variant_to_gene[variant]
-    if not gene:
+    if variant not in variant_to_gene:
         logger.error("No gene found for variant {}".format(variant))
         unknown_variants.add()
         return
+    else:
+        gene = variant_to_gene[variant]
 
     gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id)
 
