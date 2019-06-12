@@ -74,6 +74,8 @@ def main():
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
     logger.info("{} variants could not be mapped to genes and were skipped:".format(len(unknown_variants)))
+    for variant in unknown_variants:
+        logger.info(variant)
 
 
 def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene, unknown_variants):
@@ -99,7 +101,6 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     variant = row['variant_details']
     if variant not in variant_to_gene:
-        logger.error("No gene found for variant {}".format(variant))
         unknown_variants.add(variant)
         return
     else:
