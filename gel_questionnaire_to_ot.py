@@ -216,7 +216,7 @@ def read_variant_to_gene_map_from_tiering(tiering_file_name):
 
         for row in reader:
             variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))
-            variant_to_gene[variant] = row['genomic_feature_ensembl_id']
+            variant_to_gene[variant] = row['ensembl_id']
 
     return variant_to_gene
 
