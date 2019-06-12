@@ -13,7 +13,7 @@ PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
 DATABASE_VERSION = "6"  # Change if version changes
 ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
-LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}"
+LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}&query.phenotypes_explained~eq={phenotype}"
 
 
 def main():
@@ -106,7 +106,8 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
     else:
         gene = variant_to_gene[variant]
 
-    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id)
+    # Link to Labkey based on participant, variant and phenotype
+    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id, phenotype=phenotype)
 
     link_text = build_link_text(row)
 
