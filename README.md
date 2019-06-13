@@ -61,7 +61,7 @@ Currently the Open Targets schema requires that all genetic associations have va
 
 `python gel_questionnaire_to_ot.py --input gmc_exit_questionnaire_v6.tsv --tiering tiering_data_v6_t1t2only.tsv`
 
-Note that the tiering data is required for the exist questionnaire conversion; Open Targets requires variants to be mapped to genes, and the questionnaire table does not include Ensembl gene identifiers. The tiering data does, so this is used to generate a lookup table which associates variant locations with genes.
+Note that the tiering data is required for the exit questionnaire conversion; Open Targets requires variants to be mapped to genes, and the questionnaire table does not include Ensembl gene identifiers. The tiering data does, so this is used to generate a lookup table which associates variant locations with genes.
 
 ## Docker
 
