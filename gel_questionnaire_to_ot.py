@@ -25,6 +25,8 @@ def main():
     parser.add_argument('--tiering', help="Tiering data TSV input file, required for variant:gene mapping",
                         required=True, action='store')
 
+    parser.add_argument('--filter_participants', help="List of participants to filter out", required=False, action='store')
+
     parser.add_argument("--log-level", help="Set the log level", action='store', default='WARNING')
 
     args = parser.parse_args()
@@ -49,6 +51,11 @@ def main():
 
     unknown_variants = set()
 
+    if args.filter_participants:
+        participants_to_filter = gel_utils.read_participants_to_filter(args.filter_participants, logger)
+    else:
+        participants_to_filter = list()
+
     logger.info("Reading TSV from " + args.input)
 
     with open(args.input) as question_tsv_file:
@@ -63,6 +70,9 @@ def main():
                 sys.exit(1)
 
         for row in reader:
+
+            if row['participant_id'] in participants_to_filter:
+                continue
 
             my_instance = build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene,
                                                         unknown_variants)

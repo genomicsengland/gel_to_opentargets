@@ -2,6 +2,9 @@
 Utility functions for converting GEL data to Open Targets.
 """
 
+import csv
+import sys
+
 
 def read_phenotype_to_efo_mapping(filename):
     phenotype_map = dict()
@@ -76,3 +79,28 @@ def build_consequence_type_to_so_map():
     }
 
     return consequence_to_so_map
+
+
+def read_participants_to_filter(filter_file, logger):
+    """
+    Read a file containing a list of participant IDs to filter out.
+    :param filter_file: TSV file containing a column called participant_id - these will be filtered out.
+    The file can contain other columns as well.
+    :param logger: logger to use.
+    :return: A list of participant IDs.
+    """
+
+    participant_list = list()
+
+    with open(filter_file) as tsv_file:
+
+        reader = csv.DictReader(tsv_file, delimiter='\t')
+
+        if "participant_id" not in reader.fieldnames:
+            logger.error("{} does not contain a 'participant_id' column".format(filter_file))
+            sys.exit(1)
+
+        for row in reader:
+            participant_list.append(row['participant_id'])
+
+    return participant_list

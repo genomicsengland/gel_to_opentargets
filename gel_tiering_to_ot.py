@@ -28,6 +28,8 @@ def main():
 
     parser.add_argument('--pedigree', help="Pedigree data TSV input file", required=True, action='store')
 
+    parser.add_argument('--filter_participants', help="List of participants to filter out", required=False, action='store')
+
     parser.add_argument("--log-level", help="Set the log level", action='store', default='WARNING')
 
     args = parser.parse_args()
@@ -55,6 +57,11 @@ def main():
 
     fake_rs_counter = itertools.count(start=FAKE_RS_ID_BASE)
 
+    if args.filter_participants:
+        participants_to_filter = gel_utils.read_participants_to_filter(args.filter_participants, logger)
+    else:
+        participants_to_filter = list()
+
     with open(args.input) as tsv_file:
 
         reader = csv.DictReader(tsv_file, delimiter='\t')
@@ -66,6 +73,9 @@ def main():
                 sys.exit(1)
 
         for row in reader:
+
+            if row['participant_id'] in participants_to_filter:
+                continue
 
             # Some rows have several, comma-separated consequence types; only use one in this case
             if ',' in row['consequence_type']:
