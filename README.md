@@ -22,11 +22,11 @@ Both scripts need to have a set of mappings from disease name to EFO term; by de
 
 3. Extract phenotypes as strings from the tiering TSV file file (including removing blank lines)
 
-`tail -n +2 tiering_data.tsv | cut -d$'\t' -f 4 > tiering_phenotypes.txt`
+`tail -n +2 tiering_data.tsv | cut -d$'\t' -f 6 > tiering_phenotypes.txt`
 
 4. Extract phenotypes from the exit questionnaire data
 
-`tail -n +2 gmc_exit_questionnaire.tsv | cut -d$'\t' -f 12 > question_phenotypes.txt`
+`tail -n +2 gmc_exit_questionnaire.tsv | cut -d$'\t' -f 13 > question_phenotypes.txt`
 
 5. Produce a unique set of phenotypes and remove blank lines
 

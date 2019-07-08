@@ -88,7 +88,7 @@ def main():
                 count += 1
 
     logger.info("Processed %d objects" % count)
-    logger.info("Generated synthetic rsIDs for %d entries" % (fake_rs_counter.next() - FAKE_RS_ID_BASE))
+    logger.info("Generated synthetic rsIDs for %d entries" % (next(fake_rs_counter) - FAKE_RS_ID_BASE))
     logger.info("%d phenotypes were not found:" % len(unknown_phenotypes))
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
