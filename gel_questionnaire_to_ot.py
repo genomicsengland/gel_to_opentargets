@@ -35,8 +35,8 @@ def main():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.getLevelName(args.log_level))
 
-    required_columns = ["participant_id", "family_id", "phenotypes_explained", "variant_details",
-                        "acmg_classification", "actionability", "case_solved_family"]
+    required_columns = ["participant_id", "family_id", "phenotypes_explained", "chromosome", "position", "reference",
+                        "alternate", "acmg_classification", "actionability", "case_solved_family"]
 
     count = 0
 
@@ -110,7 +110,7 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     clinical_significance = row['acmg_classification']
 
-    variant = row['variant_details']
+    variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))  # matches format in map
     if variant not in variant_to_gene:
         unknown_variants.add(variant)
         return
@@ -220,6 +220,11 @@ def build_link_text(row):
 
 
 def read_variant_to_gene_map_from_tiering(tiering_file_name):
+    """
+    Build a map of variants (in the form chr:pos:ref:alt) to genes (Ensembl IDs) by reading tiering data.
+    :param tiering_file_name: Name of tiering file.
+    :return: Map of variants to gene identifiers.
+    """
     variant_to_gene = {}
 
     with open(tiering_file_name) as tiering_tsv_file:

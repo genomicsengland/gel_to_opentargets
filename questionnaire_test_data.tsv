@@ -1,4 +1,4 @@
-participant_id	family_id	assembly	event_date	additional_comments	case_solved_family	segregation_question	actionability	phenotypes_solved	variant_group	clinical_utility	phenotypes_explained	acmg_classification	confirmation_decision	confirmation_outcome	publications	reporting_question	variant_details
-1234	1234	GRCh37	2019-01-01	N/A	yes	no	yes	yes	1	change_in_medication	Epileptic encephalopathy	pathogenic_variant	yes	yes	1943686;2342539;18326704;1429711	yes	1:72220841:A:C
-1234	1234	GRCh37	2019-01-01	N/A	yes	no	yes	yes	1	change_in_medication	Dilated Cardiomyopathy	likely_pathogenic_variant	yes	yes	23521651	yes	2:12820841:G:T
-111	555	GRCh37	2019-01-02	N/A	no	yes	no	no	2	unknown	Seizures	variant_of_unknown_clinical_significance	no	yes	N/A	no	NA
+participant_id	family_id	assembly	event_date	additional_comments	case_solved_family	segregation_question	actionability	phenotypes_solved	variant_group	clinical_utility	phenotypes_explained	acmg_classification	confirmation_decision	confirmation_outcome	publications	reporting_question	chromosome	position	reference	alternate
+1234	1234	GRCh37	2019-01-01	N/A	yes	no	yes	yes	1	change_in_medication	Epileptic encephalopathy	pathogenic_variant	yes	yes	1943686;2342539;18326704;1429711	yes	1	72220841	A	C
+1234	1234	GRCh37	2019-01-01	N/A	yes	no	yes	yes	1	change_in_medication	Dilated Cardiomyopathy	likely_pathogenic_variant	yes	yes	23521651	yes	2	12820841	G	T
+111	555	GRCh37	2019-01-02	N/A	no	yes	no	no	2	unknown	Seizures	variant_of_unknown_clinical_significance	no	yes	N/A	no	NA	NA	NA
