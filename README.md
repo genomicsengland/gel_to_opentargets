@@ -32,7 +32,7 @@ Both scripts need to have a set of mappings from disease name to EFO term; by de
 
 `sort -uf tiering_phenotypes.txt question_phenotypes.txt | sed '/^$/d' > phenotypes.txt`
 
-6. Use opentargets/OnToma to perform the mapping
+6. Use [opentargets/OnToma](https://github.com/opentargets/OnToma) to perform the mapping
 
 `ontoma phenotypes.txt phenotypes_text_to_efo.txt`  
 
