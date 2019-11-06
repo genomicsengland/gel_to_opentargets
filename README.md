@@ -16,9 +16,9 @@ There are separate scripts for converting the tiering data and the questionnaire
 
 Both scripts need to have a set of mappings from disease name to EFO term; by default this should be in a file called `phenotypes_text_to_efo.txt`. This can be generated from GEL data as follows:
 
-1. Extract relevant data from `tiering_data` table in LabKey, save as TSV
+1. Extract relevant data from `tiering_data` table in LabKey, save as TSV. Only rows from `tiering_data` with the `Tier` field having a value of `TIER2` or `TIER3` should be used.
 
-2. Extract relevant data from `gmc_exit_questionnaire` table in LabKey, save as TSV
+2. Extract relevant data from `gmc_exit_questionnaire` table in LabKey, save as TSV. Currently the whole table is used.
 
 3. Extract phenotypes as strings from the tiering TSV file file (including removing blank lines)
 
