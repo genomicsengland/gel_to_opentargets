@@ -58,6 +58,10 @@ Currently the Open Targets schema requires that all genetic associations have va
 
 ## Usage
 
+### Extracting data from LabKey
+
+`python labkey_extract.py`
+
 ### Rare disease tiering data
 
 `python gel_tiering_to_ot.py --input sample.tsv --pedigree sample_pedigree.tsv`
