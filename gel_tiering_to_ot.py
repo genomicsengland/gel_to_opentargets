@@ -13,7 +13,7 @@ PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
 DATABASE_VERSION = "8"  # Change if version changes
 ASSERTION_DATE = "2019-11-28T23:00:00"  # Change to date of data release
-LABKEY_PARTICIPANT_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq={participant_id}"
+LABKEY_PARTICIPANT_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v8_2019-11-28/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq={participant_id}"
 SCHEMA_VERSION = "1.6.0"  # Open Targets JSON schema version
 
 
