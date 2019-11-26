@@ -14,34 +14,7 @@ There are separate scripts for converting the tiering data and the questionnaire
 
 ### Phenotypes
 
-Both scripts need to have a set of mappings from disease name to EFO term; by default this should be in a file called `phenotypes_text_to_efo.txt`. This can be generated from GEL data as follows:
-
-1. Extract relevant data from `tiering_data` table in LabKey, save as TSV. Only rows from `tiering_data` with the `Tier` field having a value of `TIER1` or `TIER2` should be used.
-
-2. Extract relevant data from `rare_diseases_participant_disease` table in LabKey, save as TSV. Currently the whole table is used.
-
-3. Extract phenotypes as strings from the tiering TSV file file (including removing blank lines)
-
-`tail -n +2 tiering_data.tsv | cut -d$'\t' -f 6 > tiering_phenotypes.txt`
-
-4. Extract phenotypes from the exit questionnaire data
-
-`tail -n +2 rare_diseases_participant_disease.tsv | cut -d$'\t' -f 8 > question_phenotypes.txt`
-
-5. Produce a unique set of phenotypes and remove blank lines
-
-`sort -uf tiering_phenotypes.txt question_phenotypes.txt | sed '/^$/d' > phenotypes.txt`
-
-6. Use [opentargets/OnToma](https://github.com/opentargets/OnToma) to perform the mapping
-
-`ontoma phenotypes.txt phenotypes_text_to_efo.txt`  
-
-7. Strip the OnToma output to create a file (not actually required since `gel_to_ot.py` only uses first 2 fields)
-
-`tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
-
-8. Note that there are some manual phenotype mappings in `gel_utils.py` in the `apply_phenotype_mapping_overrides` function.
-
+Both scripts need to have a set of mappings from disease name to EFO term; by default this should be in a file called `phenotypes_text_to_efo.txt`. _A copy of this is supplied in this repo_, but if you need to generate a new one, instructions are in the "Generating phenotype to EFO mappings" section below.
 
 ### Pedigree
 
@@ -84,3 +57,31 @@ To run via Docker:
 ## Test data
 
 Note that the data in `test_data.tsv` is intended to be representative of the tiering data, but certain fields (e.g. participant_id are placeholders and are not taken from real data). Similarly `questionnaire_test_data.tsv` is representative but synthetic.
+
+### Generating phenotype to EFO mappings
+
+1. Extract relevant data from `tiering_data` table in LabKey, save as TSV. Only rows from `tiering_data` with the `Tier` field having a value of `TIER1` or `TIER2` should be used.
+
+2. Extract relevant data from `rare_diseases_participant_disease` table in LabKey, save as TSV. Currently the whole table is used.
+
+3. Extract phenotypes as strings from the tiering TSV file file (including removing blank lines)
+
+`tail -n +2 tiering_data.tsv | cut -d$'\t' -f 6 > tiering_phenotypes.txt`
+
+4. Extract phenotypes from the exit questionnaire data
+
+`tail -n +2 rare_diseases_participant_disease.tsv | cut -d$'\t' -f 8 > question_phenotypes.txt`
+
+5. Produce a unique set of phenotypes and remove blank lines
+
+`sort -uf tiering_phenotypes.txt question_phenotypes.txt | sed '/^$/d' > phenotypes.txt`
+
+6. Use [opentargets/OnToma](https://github.com/opentargets/OnToma) to perform the mapping
+
+`ontoma phenotypes.txt phenotypes_text_to_efo.txt`  
+
+7. Strip the OnToma output to create a file (not actually required since `gel_to_ot.py` only uses first 2 fields)
+
+`tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
+
+8. Note that there are some manual phenotype mappings in `gel_utils.py` in the `apply_phenotype_mapping_overrides` function.
