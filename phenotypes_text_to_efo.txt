@@ -1,10 +1,13 @@
 query	term	label	source	quality	action
-All recognised syndromes and those with suggestive features::Mitochondrial disorders	http://www.orpha.net/ORDO/Orphanet_33364	Trichothiodystrophy	OLS API EFO lookup	fuzzy	check if valid
+Agranulocytosis	http://purl.obolibrary.org/obo/HP_0012234	agranulocytosis	EFO OBO	match	
+All recognised syndromes and those with suggestive features	http://www.ebi.ac.uk/efo/EFO_0007484	sick building syndrome	OLS API EFO lookup	fuzzy	check if valid
+Alport syndrome	http://www.orpha.net/ORDO/Orphanet_63	alport syndrome	OT Zooma Mappings	match	
 Amyotrophic lateral sclerosis/motor neuron disease	http://www.ebi.ac.uk/efo/EFO_0000253	amyotrophic lateral sclerosis	OLS API EFO lookup	fuzzy	check if valid
 Amyotrophic lateral sclerosis or motor neuron disease	http://www.ebi.ac.uk/efo/EFO_0000253	amyotrophic lateral sclerosis	OLS API EFO lookup	fuzzy	check if valid
-Amyotrophic lateral sclerosis or motor neuron disease::Amyotrophic lateral sclerosis/motor neuron disease	http://www.ebi.ac.uk/efo/EFO_0000253	amyotrophic lateral sclerosis	OLS API EFO lookup	fuzzy	check if valid
-Anophthalmia/microphthamia	http://www.orpha.net/ORDO/Orphanet_98555	Anophthalmia - microphthalmia	OLS API EFO lookup	fuzzy	check if valid
-Anophthalmia or microphthamia	http://www.orpha.net/ORDO/Orphanet_98555	Anophthalmia - microphthalmia	OLS API EFO lookup	fuzzy	check if valid
+Anophthalmia/microphthamia	http://purl.obolibrary.org/obo/HP_0000528	Anophthalmia	OLS API EFO lookup	fuzzy	check if valid
+Anophthalmia or microphthalmia	http://www.orpha.net/ORDO/Orphanet_98555	Anophthalmia - microphthalmia	OLS API EFO lookup	fuzzy	check if valid
+Anophthalmia or microphthamia	http://purl.obolibrary.org/obo/HP_0000528	Anophthalmia	OLS API EFO lookup	fuzzy	check if valid
+A- or hypo-gammaglobulinaemia	http://www.orpha.net/ORDO/Orphanet_2435	Hypo- and hypermelanotic cutaneous macules - retarded growth - intellectual disability	OLS API EFO lookup	fuzzy	check if valid
 Apparent aplastic anaemia or paroxysmal nocturnal haemoglobinuria	http://www.ebi.ac.uk/efo/EFO_1001381	Nocturnal Paroxysmal Dystonia	OLS API EFO lookup	fuzzy	check if valid
 Apparent aplastic anaemia / paroxysmal nocturnal haemoglobinuria	http://www.ebi.ac.uk/efo/EFO_1001381	Nocturnal Paroxysmal Dystonia	OLS API EFO lookup	fuzzy	check if valid
 Arrhythmogenic Right Ventricular Cardiomyopathy	http://www.orpha.net/ORDO/Orphanet_247	arrhythmogenic right ventricular cardiomyopathy	OT Zooma Mappings	match	
@@ -12,224 +15,256 @@ Arthrogryposis	http://www.ebi.ac.uk/efo/EFO_0003857	arthrogryposis	EFO OBO	match
 Arthrogrythsis					
 atypical beckwith wiedemann syndrome	http://www.orpha.net/ORDO/Orphanet_116	Beckwith-Wiedemann syndrome	OLS API EFO lookup	fuzzy	check if valid
 Atypical Beckwith-Wiedemann syndrome	http://www.orpha.net/ORDO/Orphanet_116	Beckwith-Wiedemann syndrome	OLS API EFO lookup	fuzzy	check if valid
-Atypical haemolytic uraemic syndrome	http://www.orpha.net/ORDO/Orphanet_238523	Atypical hypotonia - cystinuria syndrome	OLS API EFO lookup	fuzzy	check if valid
-Auditory Neuropathy Spectrum Disorder	http://www.ebi.ac.uk/efo/EFO_0003756	autism spectrum disorder	OLS API EFO lookup	fuzzy	check if valid
-Autosomal dominant deafness	http://www.orpha.net/ORDO/Orphanet_79499	Autosomal dominant deafness-onychodystrophy syndrome	OLS API EFO lookup	fuzzy	check if valid
+atypical-beckwith-wiedemann-syndrome	http://www.orpha.net/ORDO/Orphanet_116	Beckwith-Wiedemann syndrome	OLS API EFO lookup	fuzzy	check if valid
+Atypical haemolytic uraemic syndrome	http://purl.obolibrary.org/obo/MONDO_0001549	hemolytic-uremic syndrome	OLS API EFO lookup	fuzzy	check if valid
+Auditory Neuropathy Spectrum Disorder	http://purl.obolibrary.org/obo/MONDO_0021944	auditory neuropathy	OLS API EFO lookup	match	
+Autosomal dominant deafness	http://purl.obolibrary.org/obo/MONDO_0019587	autosomal dominant nonsyndromic deafness	OLS API EFO lookup	match	
 Autosomal recessive congenital ichthyosis	http://www.orpha.net/ORDO/Orphanet_281097	autosomal recessive congenital ichthyosis 1	Zooma API lookup	match	
 Balanced translocations with an unusual phenotype					
-balanced-translocations-with-an-unusual-phenotype	http://www.ebi.ac.uk/efo/EFO_1000508	Renal Cell Carcinoma Associated with Xp11.2 Translocations/TFE3 Gene Fusions	OLS API EFO lookup	fuzzy	check if valid
 Bardet-Biedl Syndrome	http://www.orpha.net/ORDO/Orphanet_110	bardet-biedl syndrome	OT Zooma Mappings	match	
-Bardet-Biedl Syndrome::Bardet-Biedl syndrome	http://www.ebi.ac.uk/efo/EFO_0009021	Bardet-Biedl syndrome 1	OLS API EFO lookup	fuzzy	check if valid
 Bilateral microtia	http://purl.obolibrary.org/obo/HP_0008551	Microtia	OLS API HP exact lookup	match	check if in OT
 Bladder exstrophy	http://www.orpha.net/ORDO/Orphanet_93930	Bladder exstrophy	OLS API EFO lookup	match	
-Brain channelopathy	http://www.ebi.ac.uk/efo/EFO_1001899	muscular channelopathy	OLS API EFO lookup	fuzzy	check if valid
+Brain channelopathy	http://purl.obolibrary.org/obo/MONDO_0021016	channelopathy	OLS API EFO lookup	fuzzy	check if valid
 Brugada syndrome	http://www.orpha.net/ORDO/Orphanet_130	brugada syndrome	Zooma API lookup	match	
-CAKUT	http://www.orpha.net/ORDO/Orphanet_93545	Renal or urinary tract malformation	OLS API ORDO exact lookup	match	check if in OT
-CAKUT::Congenital Anomaly of the Kidneys and Urinary Tract (CAKUT)	http://www.ebi.ac.uk/efo/EFO_0003103	urinary tract infection	OLS API EFO lookup	fuzzy	check if valid
+CAKUT	http://www.orpha.net/ORDO/Orphanet_183539	Genetic renal or urinary tract malformation	OLS API EFO lookup	match	
+Cardio-facio-cutaneous syndrome	http://www.orpha.net/ORDO/Orphanet_217026	cardio-facio-cutaneous syndrome	Zooma API lookup	match	
 Cataracts	http://www.ebi.ac.uk/efo/EFO_0001059	cataract	EFO OBO	match	
 Catecholaminergic Polymorphic Ventricular Tachycardia	http://www.orpha.net/ORDO/Orphanet_3286	catecholaminergic polymorphic ventricular tachycardia	OT Zooma Mappings	match	
-Cerebellar hypoplasia	http://purl.obolibrary.org/obo/HP_0001321	Cerebellar hypoplasia	OLS API HP exact lookup	match	check if in OT
+Cerebellar hypoplasia	http://purl.obolibrary.org/obo/HP_0001321	Cerebellar hypoplasia	OLS API EFO lookup	match	
 Cerebral folate deficiency	http://www.orpha.net/ORDO/Orphanet_217382	cerebral folate deficiency	OT Zooma Mappings	match	
+charcot marie tooth disease	http://www.orpha.net/ORDO/Orphanet_166	charcot-marie-tooth disease	Zooma API lookup	match	
 Charcot-Marie-Tooth disease	http://www.orpha.net/ORDO/Orphanet_166	charcot-marie-tooth disease	Zooma API lookup	match	
-charcot-marie-tooth-disease	http://www.orpha.net/ORDO/Orphanet_166	charcot-marie-tooth disease	Zooma API lookup	match	
 Choanal atresia	http://purl.obolibrary.org/obo/HP_0000453	Choanal atresia	OLS API HP exact lookup	match	check if in OT
 Chondrodysplasia punctata	http://www.orpha.net/ORDO/Orphanet_93442	Chondrodysplasia punctata	OLS API EFO lookup	match	
 Classical Beckwith-Wiedemann syndrome	http://www.orpha.net/ORDO/Orphanet_116	Beckwith-Wiedemann syndrome	OLS API EFO lookup	fuzzy	check if valid
-Classical Ehlers-Danlos Syndrome	http://www.orpha.net/ORDO/Orphanet_98249	Ehlers-Danlos syndrome	OLS API EFO lookup	fuzzy	check if valid
+Classical Ehlers-Danlos Syndrome	http://www.orpha.net/ORDO/Orphanet_287	Classical Ehlers-Danlos syndrome	OLS API ORDO exact lookup	match	check if in OT
 Classical tuberous sclerosis	http://www.orpha.net/ORDO/Orphanet_805	Tuberous sclerosis	OLS API EFO lookup	fuzzy	check if valid
 coarse facial features including coffin siris like disorders	http://www.orpha.net/ORDO/Orphanet_1465	Coffin-Siris syndrome	OLS API EFO lookup	fuzzy	check if valid
-Coarse facial features including Coffin-Siris-like disorders	http://www.orpha.net/ORDO/Orphanet_1465	Coffin-Siris syndrome	OLS API EFO lookup	fuzzy	check if valid
+Coarse facial features including Coffin-Siris-like disorders	http://purl.obolibrary.org/obo/HP_0000280	Coarse facial features	OLS API EFO lookup	fuzzy	check if valid
 Cockayne syndrome	http://www.orpha.net/ORDO/Orphanet_191	cockayne syndrome	OT Zooma Mappings	match	
 Combined B and T cell defect	http://www.orpha.net/ORDO/Orphanet_169346	DNA repair defect other than combined T-cell and B-cell immunodeficiencies	OLS API EFO lookup	fuzzy	check if valid
 Complex Parkinsonism (includes pallido-pyramidal syndromes)	http://www.orpha.net/ORDO/Orphanet_391411	Atypical juvenile parkinsonism	OLS API EFO lookup	fuzzy	check if valid
-Cone Dysfunction Syndrome	http://purl.obolibrary.org/obo/HP_0030637	Cone dysfunction syndrome	OLS API HP exact lookup	match	check if in OT
-Congenital adrenal hypoplasia	http://purl.obolibrary.org/obo/HP_0008244	Congenital adrenal hypoplasia	OLS API HP exact lookup	match	check if in OT
-Congenital anaemias	http://www.ebi.ac.uk/efo/EFO_0007220	congenital toxoplasmosis	OLS API EFO lookup	fuzzy	check if valid
-Congenital Anomaly of the Kidneys and Urinary Tract (CAKUT)	http://www.orpha.net/ORDO/Orphanet_2190	Congenital hydronephrosis	OLS API EFO lookup	fuzzy	check if valid
-congenital-anomaly-of-the-kidneys-and-urinary-tract-cakut	http://www.ebi.ac.uk/efo/EFO_1000700	fibroepithelial polyp of urethra	OLS API EFO lookup	fuzzy	check if valid
-Congenital Anomaly of the Kidneys and Urinary Tract (CAKUT)::Intellectual disability	http://www.ebi.ac.uk/efo/EFO_0009149	muscular dystrophy, congenital, with cataracts and intellectual disability	OLS API EFO lookup	fuzzy	check if valid
-Congenital hearing impairment	http://www.ebi.ac.uk/efo/EFO_0004238	hearing loss	OLS API EFO lookup	fuzzy	check if valid
-Congenital hearing impairment (profound/severe)	http://www.ebi.ac.uk/efo/EFO_0004238	hearing loss	OLS API EFO lookup	fuzzy	check if valid
-Congenital hearing impairment (profound/severe)::Congenital hearing impairment	http://www.ebi.ac.uk/efo/EFO_0004238	hearing loss	OLS API EFO lookup	fuzzy	check if valid
-Congenital hearing impairment (profound/severe)::Intellectual disability	http://www.ebi.ac.uk/efo/EFO_0004238	hearing loss	OLS API EFO lookup	fuzzy	check if valid
+Cone Dysfunction Syndrome	http://purl.obolibrary.org/obo/HP_0030637	Congenital stationary cone dysfunction	OLS API HP exact lookup	match	check if in OT
+Congenital adrenal hypoplasia	http://www.orpha.net/ORDO/Orphanet_95702	Cytomegalic congenital adrenal hypoplasia	OLS API EFO lookup	match	
+Congenital anaemias					
+congenital anomaly of the kidneys and urinary tract cakut	http://purl.obolibrary.org/obo/GO_0014848	urinary tract smooth muscle contraction	OLS API EFO lookup	fuzzy	check if valid
+Congenital Anomaly of the Kidneys and Urinary Tract (CAKUT)	http://purl.obolibrary.org/obo/GO_0014848	urinary tract smooth muscle contraction	OLS API EFO lookup	fuzzy	check if valid
+Congenital disorders of glycosylation	http://www.orpha.net/ORDO/Orphanet_137	Congenital disorder of glycosylation	OLS API EFO lookup	match	
+Congenital hearing impairment	http://purl.obolibrary.org/obo/HP_0008527	Congenital sensorineural hearing impairment	OLS API EFO lookup	fuzzy	check if valid
+Congenital hearing impairment (profound/severe)	http://purl.obolibrary.org/obo/HP_0011476	Profound sensorineural hearing impairment	OLS API EFO lookup	fuzzy	check if valid
 Congenital hypothyroidism	http://www.orpha.net/ORDO/Orphanet_79118	congenital hypothyroidism	Zooma API lookup	match	
 Congenital muscular dystrophy	http://www.orpha.net/ORDO/Orphanet_97242	congenital muscular dystrophy	OT Zooma Mappings	match	
-Congenital myaesthenia	http://www.ebi.ac.uk/efo/EFO_0007220	congenital toxoplasmosis	OLS API EFO lookup	fuzzy	check if valid
+Congenital myaesthenia					
 Congenital myopathy	http://www.orpha.net/ORDO/Orphanet_97245	congenital myopathy	OT Zooma Mappings	match	
-Congential disorders of glycosylation	http://purl.obolibrary.org/obo/GO_0070085	glycosylation	OLS API EFO lookup	fuzzy	check if valid
+Congenital neutropaenia					
+Congential disorders of glycosylation	http://www.ebi.ac.uk/efo/EFO_0005546	congenital disorder of glycosylation type II	OLS API EFO lookup	fuzzy	check if valid
 Corneal abnormalities	http://purl.obolibrary.org/obo/HP_0000481	Abnormal cornea morphology	OLS API HP exact lookup	match	check if in OT
+Costello syndrome	http://www.orpha.net/ORDO/Orphanet_3071	costello syndrome	OT Zooma Mappings	match	
 Craniosynostosis syndromes	http://www.orpha.net/ORDO/Orphanet_2462	craniosynostosis syndrome	Zooma API lookup	match	
-Cystic kidney disease	http://www.ebi.ac.uk/efo/EFO_0008615	Cystic Kidney Disease	OLS API EFO lookup	match	
+Craniosynostosis syndromes phenotypes	http://www.orpha.net/ORDO/Orphanet_1531	Craniosynostosis	OLS API EFO lookup	fuzzy	check if valid
+Cystic kidney disease	http://www.ebi.ac.uk/efo/EFO_0008615	Cystic kidney disease	Zooma API lookup	match	
+Cytopenia and pancytopenia	http://www.orpha.net/ORDO/Orphanet_313800	Optic nerve edema-splenomegaly syndrome	OLS API EFO lookup	fuzzy	check if valid
 Developmental macular and foveal dystrophy	http://www.orpha.net/ORDO/Orphanet_75327	North Carolina macular dystrophy	OLS API EFO lookup	fuzzy	check if valid
 Diabetes with additional phenotypes suggestive of a monogenic aetiology	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
 Dilated Cardiomyopathy	http://www.ebi.ac.uk/efo/EFO_0000407	dilated cardiomyopathy	EFO OBO	match	
-dilated-cardiomyopathy	http://www.ebi.ac.uk/efo/EFO_0000407	dilated cardiomyopathy	OLS API EFO lookup	fuzzy	check if valid
 Dilated Cardiomyopathy and conduction defects	http://www.ebi.ac.uk/efo/EFO_0000407	dilated cardiomyopathy	OLS API EFO lookup	fuzzy	check if valid
 Dilated Cardiomyopathy (DCM)	http://www.ebi.ac.uk/efo/EFO_0000407	dilated cardiomyopathy	OLS API EFO lookup	fuzzy	check if valid
-Disorders of sex development	http://www.orpha.net/ORDO/Orphanet_325546	Sex chromosome disorder of sex development	OLS API EFO lookup	fuzzy	check if valid
+Disorders of sex development	http://www.orpha.net/ORDO/Orphanet_325690	Genetic disorder of sex development	OLS API EFO lookup	match	
+Disseminated non-tuberculous mycobacterial infection	http://www.ebi.ac.uk/efo/EFO_1001498	disseminated atypical mycobacterial infection	OLS API EFO lookup	fuzzy	check if valid
 Distal myopathies					
 distal-myopathies					
-Distal myopathies::Paediatric motor neuronopathies	http://www.orpha.net/ORDO/Orphanet_53739	Distal hereditary motor neuropathy	OLS API EFO lookup	fuzzy	check if valid
-Early onset and familial Parkinson%#27;s Disease	http://www.orpha.net/ORDO/Orphanet_1020	Early-onset autosomal dominant Alzheimer disease	OLS API EFO lookup	fuzzy	check if valid
+Ductal plate malformation	http://www.ebi.ac.uk/efo/EFO_0006318	breast ductal adenocarcinoma	OLS API EFO lookup	fuzzy	check if valid
 Early onset and familial Parkinson's Disease	http://www.orpha.net/ORDO/Orphanet_1020	Early-onset autosomal dominant Alzheimer disease	OLS API EFO lookup	fuzzy	check if valid
+early onset and familial parkinsons disease	http://www.orpha.net/ORDO/Orphanet_1020	Early-onset autosomal dominant Alzheimer disease	OLS API EFO lookup	fuzzy	check if valid
+Early onset dementia	http://www.orpha.net/ORDO/Orphanet_98539	Early-onset ataxia with dementia	OLS API EFO lookup	fuzzy	check if valid
 Early onset dementia (encompassing fronto-temporal dementia and prion disease)	http://www.orpha.net/ORDO/Orphanet_98539	Early-onset ataxia with dementia	OLS API EFO lookup	fuzzy	check if valid
-Early onset dementia (encompassing fronto-temporal dementia and prion disease)::Inherited white matter disorders	http://www.ebi.ac.uk/efo/EFO_0004720	prion disease	OLS API EFO lookup	fuzzy	check if valid
-Early onset dystonia	http://www.orpha.net/ORDO/Orphanet_210571	Dystonia 16	OLS API EFO lookup	fuzzy	check if valid
-Early onset pancytopenia and red cell disorders	http://purl.obolibrary.org/obo/HP_0001915	aplastic anemia	OLS API EFO lookup	fuzzy	check if valid
+Early onset dystonia	http://purl.obolibrary.org/obo/MONDO_0100016	early-onset generalized dystonia	OLS API EFO lookup	fuzzy	check if valid
+Early onset familial premature ovarian insufficiency	http://purl.obolibrary.org/obo/HP_0008209	Premature ovarian insufficiency	OLS API EFO lookup	fuzzy	check if valid
+Early onset or familial intestinal pseudo obstruction	http://www.ebi.ac.uk/efo/EFO_1000988	intestinal pseudo-obstruction	OLS API EFO lookup	fuzzy	check if valid
+Early onset pancytopenia and red cell disorders	http://purl.obolibrary.org/obo/HP_0001876	Pancytopenia	OLS API EFO lookup	fuzzy	check if valid
 Ear malformations with hearing impairment	http://www.orpha.net/ORDO/Orphanet_139512	Neuropathy with hearing impairment	OLS API EFO lookup	fuzzy	check if valid
-Ectodermal dysplasia without a known gene mutation	http://www.orpha.net/ORDO/Orphanet_1174	Cerebellar ataxia - ectodermal dysplasia	OLS API EFO lookup	fuzzy	check if valid
+Ectodermal dysplasia without a known gene mutation	http://www.orpha.net/ORDO/Orphanet_238468	Hypohidrotic ectodermal dysplasia	OLS API EFO lookup	fuzzy	check if valid
 Ehlers-Danlos Syndrome (unusual phenotypes e.g. absent pain sense)	http://www.orpha.net/ORDO/Orphanet_98249	Ehlers-Danlos syndrome	OLS API EFO lookup	fuzzy	check if valid
 Epidermolysis bullosa	http://www.ebi.ac.uk/efo/EFO_1000690	epidermolysis bullosa	EFO OBO	match	
 Epilepsy plus other features	http://www.ebi.ac.uk/efo/EFO_0000474	epilepsy	OLS API EFO lookup	fuzzy	check if valid
 Epileptic encephalopathy	http://purl.obolibrary.org/obo/HP_0200134	epileptic encephalopathy	OT Zooma Mappings	match	
 Erythropoietic protoporphyria, mild variant	http://www.orpha.net/ORDO/Orphanet_79278	erythropoietic protoporphyria	Zooma API lookup	match	
 Exceptionally young adult onset cancer	http://www.orpha.net/ORDO/Orphanet_2828	Young adult-onset Parkinsonism	OLS API EFO lookup	fuzzy	check if valid
-Exceptionally young adult onset cancer::Multiple bowel polyps	http://www.orpha.net/ORDO/Orphanet_2828	Young adult-onset Parkinsonism	OLS API EFO lookup	fuzzy	check if valid
 Extreme early-onset hypertension	http://www.ebi.ac.uk/efo/EFO_0004772	early onset hypertension	OLS API EFO lookup	fuzzy	check if valid
 Fallots tetralogy	http://purl.obolibrary.org/obo/HP_0001636	tetralogy of fallot	OLS API EFO lookup	fuzzy	check if valid
-fallots-tetralogy	http://purl.obolibrary.org/obo/HP_0001636	tetralogy of fallot	OLS API EFO lookup	fuzzy	check if valid
+Familial and multiple pulmonary arteriovenous malformations	http://www.orpha.net/ORDO/Orphanet_624	Familial multiple nevi flammei	OLS API EFO lookup	fuzzy	check if valid
 Familial breast and or ovarian cancer	http://www.orpha.net/ORDO/Orphanet_145	Hereditary breast and ovarian cancer syndrome	OLS API EFO lookup	fuzzy	check if valid
 Familial breast cancer	http://www.orpha.net/ORDO/Orphanet_227535	Hereditary breast cancer	OLS API EFO lookup	match	
 Familial cerebral small vessel disease	http://www.ebi.ac.uk/efo/EFO_0008493	cerebral small vessel disease	OLS API EFO lookup	fuzzy	check if valid
-Familial colon cancer	http://www.orpha.net/ORDO/Orphanet_144	Lynch syndrome	OLS API EFO lookup	fuzzy	check if valid
+Familial cicatricial alopecia	http://www.ebi.ac.uk/efo/EFO_1002028	cicatricial alopecia	OLS API EFO lookup	fuzzy	check if valid
+Familial colon cancer	http://purl.obolibrary.org/obo/MONDO_0018630	hereditary nonpolyposis colon cancer	OLS API EFO lookup	fuzzy	check if valid
 Familial congenital heart disease	http://www.ebi.ac.uk/efo/EFO_0005207	congenital heart disease	OLS API EFO lookup	fuzzy	check if valid
-Familial disseminated superficial actinic porokeratosis	http://www.ebi.ac.uk/efo/EFO_1000757	porokeratosis	OLS API EFO lookup	fuzzy	check if valid
+Familial diabetes	http://www.orpha.net/ORDO/Orphanet_93111	Renal cysts and diabetes syndrome	OLS API EFO lookup	fuzzy	check if valid
+Familial disseminated superficial actinic porokeratosis	http://www.orpha.net/ORDO/Orphanet_79152	Disseminated superficial actinic porokeratosis	OLS API EFO lookup	fuzzy	check if valid
 Familial exudative vitreoretinopathy	http://www.orpha.net/ORDO/Orphanet_891	familial exudative vitreoretinopathy	Zooma API lookup	match	
-Familial Focal Epilepsies	http://www.ebi.ac.uk/efo/EFO_0004263	partial epilepsy	OLS API EFO lookup	fuzzy	check if valid
+Familial Focal Epilepsies	http://www.ebi.ac.uk/efo/EFO_0000773	temporal lobe epilepsy	OLS API EFO lookup	fuzzy	check if valid
 Familial Genetic Generalised Epilepsies	http://www.ebi.ac.uk/efo/EFO_0005917	generalised epilepsy	OLS API EFO lookup	fuzzy	check if valid
-Familial Genetic Generalised Epilepsies::Intellectual disability	http://www.orpha.net/ORDO/Orphanet_183757	Rare genetic intellectual disability	OLS API EFO lookup	fuzzy	check if valid
-Familial haematuria	http://www.ebi.ac.uk/efo/EFO_0002945	familial cardiomyopathy	OLS API EFO lookup	fuzzy	check if valid
-Familial hypercholesterolaemia	http://www.ebi.ac.uk/efo/EFO_0004911	familial hypercholesterolemia	OLS API EFO lookup	fuzzy	check if valid
-Familial non-syndromic cleft lip and or familial cleft palate	http://purl.obolibrary.org/obo/HP_0000175	cleft palate	OLS API EFO lookup	fuzzy	check if valid
-Familial or syndromic hypoparathyroidism	http://www.orpha.net/ORDO/Orphanet_2238	Familial isolated hypoparathyroidism	OLS API EFO lookup	fuzzy	check if valid
+Familial haematuria	http://www.ebi.ac.uk/efo/EFO_0004911	familial hypercholesterolemia	OLS API EFO lookup	fuzzy	check if valid
+Familial haemophagocytic lymphohistiocytic disorders	http://www.ebi.ac.uk/efo/EFO_0009692	voice disorders	OLS API EFO lookup	fuzzy	check if valid
+Familial hemifacial microsomia	http://www.orpha.net/ORDO/Orphanet_141136	Hemifacial microsomia	OLS API EFO lookup	fuzzy	check if valid
+Familial hidradenitis suppurativa	http://purl.obolibrary.org/obo/MONDO_0024516	familial acne inversa	OLS API EFO lookup	match	
+Familial Hirschsprung Disease	http://www.orpha.net/ORDO/Orphanet_2150	Hirschsprung disease - type D brachydactyly	OLS API EFO lookup	fuzzy	check if valid
+Familial Hypercholesterolaemia	http://www.ebi.ac.uk/efo/EFO_0004911	familial hypercholesterolemia	OLS API EFO lookup	fuzzy	check if valid
+Familial IgA nephropathy and IgA vasculitis	http://www.ebi.ac.uk/efo/EFO_0004194	IGA glomerulonephritis	OLS API EFO lookup	fuzzy	check if valid
+Familial Meniere Disease	http://www.ebi.ac.uk/efo/EFO_0006862	Meniere disease	OLS API EFO lookup	fuzzy	check if valid
+Familial non-syndromic cleft lip and or familial cleft palate	http://www.orpha.net/ORDO/Orphanet_2003	Cleft lip/palate - deafness - sacral lipoma	OLS API EFO lookup	fuzzy	check if valid
+Familial or syndromic hypoparathyroidism	http://purl.obolibrary.org/obo/MONDO_0007796	hypoparathyroidism, familial isolated	OLS API EFO lookup	fuzzy	check if valid
+Familial primary spontaneous pneumothorax	http://www.orpha.net/ORDO/Orphanet_2903	Familial spontaneous pneumothorax	OLS API EFO lookup	fuzzy	check if valid
 Familial pulmonary fibrosis	http://www.ebi.ac.uk/efo/EFO_0000768	idiopathic pulmonary fibrosis	OLS API EFO lookup	fuzzy	check if valid
 Familial rhabdomyosarcoma or sarcoma	http://www.ebi.ac.uk/efo/EFO_0000437	embryonal rhabdomyosarcoma	OLS API EFO lookup	fuzzy	check if valid
 Familial Thoracic Aortic Aneurysm Disease	http://www.orpha.net/ORDO/Orphanet_91387	Familial thoracic aortic aneurysm and aortic dissection	OLS API EFO lookup	fuzzy	check if valid
-familial-thoracic-aortic-aneurysm-disease	http://www.orpha.net/ORDO/Orphanet_91387	Familial thoracic aortic aneurysm and aortic dissection	OLS API EFO lookup	fuzzy	check if valid
 Familial tumour syndromes of the central and peripheral nervous system					
 Familial tumour syndromes of the central & peripheral nervous system	http://www.ebi.ac.uk/efo/EFO_0002431	tumour of cranial and spinal nerves	OLS API EFO lookup	fuzzy	check if valid
 Familial young-onset non-insulin-dependent diabetes	http://www.orpha.net/ORDO/Orphanet_93111	Renal cysts and diabetes syndrome	OLS API EFO lookup	fuzzy	check if valid
+Fetal hydrops	http://purl.obolibrary.org/obo/MONDO_0015193	hydrops fetalis (disease)	OLS API EFO lookup	match	
+Fetal structural CNS abnormalities	http://www.orpha.net/ORDO/Orphanet_994	Fetal akinesia deformation sequence	OLS API EFO lookup	fuzzy	check if valid
+GAinS study					
+Gastrointestinal epithelial barrier disorders	http://www.ebi.ac.uk/efo/EFO_0009692	voice disorders	OLS API EFO lookup	fuzzy	check if valid
 Generalised pustular psoriasis	http://www.ebi.ac.uk/efo/EFO_0000676	psoriasis	OLS API EFO lookup	fuzzy	check if valid
 Genetic Epilepsies with Febrile Seizures Plus	http://www.orpha.net/ORDO/Orphanet_36387	Generalized epilepsy with febrile seizures-plus	OLS API EFO lookup	fuzzy	check if valid
 Genetic Epilepsies with Febrile Seizures Plus (GEFS+)	http://www.orpha.net/ORDO/Orphanet_36387	Generalized epilepsy with febrile seizures-plus	OLS API EFO lookup	fuzzy	check if valid
-Genodermatoses with malignancies	http://www.ebi.ac.uk/efo/EFO_0000614	narcolepsy with cataplexy	OLS API EFO lookup	fuzzy	check if valid
+Genodermatoses with malignancies	http://www.ebi.ac.uk/efo/EFO_1001906	panic disorder with agoraphobia	OLS API EFO lookup	fuzzy	check if valid
 Glaucoma (developmental)	http://www.orpha.net/ORDO/Orphanet_98976	Congenital glaucoma	OLS API EFO lookup	fuzzy	check if valid
-Hereditary ataxia	http://www.orpha.net/ORDO/Orphanet_183518	Rare hereditary ataxia	OLS API EFO lookup	fuzzy	check if valid
-hereditary-ataxia	http://www.orpha.net/ORDO/Orphanet_183518	Rare hereditary ataxia	OLS API EFO lookup	fuzzy	check if valid
-Hereditary ataxia::Severe familial anorexia	http://www.orpha.net/ORDO/Orphanet_97	Familial paroxysmal ataxia	OLS API EFO lookup	fuzzy	check if valid
+GMS R104 Skeletal dysplasia	http://purl.obolibrary.org/obo/HP_0002652	Skeletal dysplasia	OLS API EFO lookup	fuzzy	check if valid
+GMS R109 Childhood onset leukodystrophy	http://www.ebi.ac.uk/efo/EFO_0004591	childhood onset asthma	OLS API EFO lookup	fuzzy	check if valid
+GMS R193 Cystic renal disease	http://www.orpha.net/ORDO/Orphanet_93587	Familial cystic renal disease	OLS API EFO lookup	fuzzy	check if valid
+GMS R27 Congenital malformation and dysmorphism syndromes - likely monogenic	http://www.orpha.net/ORDO/Orphanet_75389	Brain malformation - congenital heart disease - postaxial polydactyly	OLS API EFO lookup	fuzzy	check if valid
+GMS R29 Moderate, severe or profound intellectual disability	http://purl.obolibrary.org/obo/HP_0010864	Intellectual disability, severe	OLS API EFO lookup	fuzzy	check if valid
+GMS R381 Other rare neuromuscular disorders	http://www.orpha.net/ORDO/Orphanet_2090	GMS syndrome	OLS API EFO lookup	fuzzy	check if valid
+GMS R54 Hereditary ataxia with onset in adulthood	http://www.orpha.net/ORDO/Orphanet_1186	Infantile onset spinocerebellar ataxia	OLS API EFO lookup	fuzzy	check if valid
+GMS R55 Hereditary ataxia with onset in childhood	http://www.orpha.net/ORDO/Orphanet_1186	Infantile onset spinocerebellar ataxia	OLS API EFO lookup	fuzzy	check if valid
+GMS R61 Childhood onset hereditary spastic paraplegia	http://www.orpha.net/ORDO/Orphanet_100993	Autosomal dominant spastic paraplegia type 12	OLS API EFO lookup	fuzzy	check if valid
+GMS R84 Cerebellar anomalies	http://www.orpha.net/ORDO/Orphanet_2090	GMS syndrome	OLS API EFO lookup	fuzzy	check if valid
+GMS R86 Hydrocephalus	http://purl.obolibrary.org/obo/HP_0000238	Hydrocephalus	OLS API EFO lookup	fuzzy	check if valid
+GMS R87 Cerebral malformation	http://purl.obolibrary.org/obo/MONDO_0016054	cerebral malformation	OLS API EFO lookup	fuzzy	check if valid
+GMS R88 Severe microcephaly	http://www.orpha.net/ORDO/Orphanet_2090	GMS syndrome	OLS API EFO lookup	fuzzy	check if valid
+GMS R89 Ultra-rare and atypical monogenic disorders	http://www.orpha.net/ORDO/Orphanet_199627	Atypical autism	OLS API EFO lookup	fuzzy	check if valid
+GMS R98 Likely inborn error of metabolism - targeted testing not possible	http://purl.obolibrary.org/obo/MONDO_0020698	inborn error of biotin metabolism	OLS API EFO lookup	fuzzy	check if valid
+Hereditary ataxia	http://www.ebi.ac.uk/efo/EFO_0009671	Hereditary ataxia	Zooma API lookup	match	
+Hereditary erythrocytosis	http://www.orpha.net/ORDO/Orphanet_250165	Genetic polycythemia	OLS API EFO lookup	fuzzy	check if valid
 Hereditary haemorrhagic telangiectasia	http://www.orpha.net/ORDO/Orphanet_774	Hereditary hemorrhagic telangiectasia	OLS API EFO lookup	fuzzy	check if valid
 Hereditary spastic paraplegia	http://www.orpha.net/ORDO/Orphanet_685	hereditary spastic paraplegia	OT Zooma Mappings	match	
 Holoprosencephaly	http://www.orpha.net/ORDO/Orphanet_2162	holoprosencephaly	OT Zooma Mappings	match	
-Hydroa vacciniforme	http://www.orpha.net/ORDO/Orphanet_330058	Hydroa vacciniforme	OLS API ORDO exact lookup	match	check if in OT
-Hyperammonaemia					
-Hyperinsulinism	http://www.orpha.net/ORDO/Orphanet_276525	Familial hyperinsulinism	OLS API EFO lookup	fuzzy	check if valid
-Hyperinsulinism::Ultra-rare undescribed monogenic disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
+Hydroa vacciniforme	http://purl.obolibrary.org/obo/HP_0032381	Hydroa vacciniforme	OLS API HP exact lookup	match	check if in OT
+Hydrocephalus	http://purl.obolibrary.org/obo/HP_0000238	hydrocephalus	Zooma API lookup	match	
+Hyperammonaemia	http://www.orpha.net/ORDO/Orphanet_137908	Hypotonia with lactic acidemia and hyperammonemia	OLS API EFO lookup	fuzzy	check if valid
+Hyperinsulinism	http://purl.obolibrary.org/obo/MONDO_0002177	hyperinsulinism (disease)	OLS API EFO lookup	match	
 Hypertrophic Cardiomyopathy	http://www.ebi.ac.uk/efo/EFO_0000538	hypertrophic cardiomyopathy	EFO OBO	match	
-Hypertrophic Cardiomyopathy::Dilated Cardiomyopathy	http://www.ebi.ac.uk/efo/EFO_0000538	hypertrophic cardiomyopathy	OLS API EFO lookup	fuzzy	check if valid
 Hypoplastic Left Heart Syndrome	http://www.ebi.ac.uk/efo/EFO_0005938	hypoplastic left heart syndrome	Zooma API lookup	match	
-hypoplastic-left-heart-syndrome	http://www.ebi.ac.uk/efo/EFO_0005938	hypoplastic left heart syndrome	Zooma API lookup	match	
-Idiopathic hypogonadotropic hypogonadism	http://www.orpha.net/ORDO/Orphanet_432	Normosmic congenital hypogonadotropic hypogonadism	OLS API EFO lookup	fuzzy	check if valid
-Idiopathic ventricular fibrillation	http://www.orpha.net/ORDO/Orphanet_228140	Idiopathic ventricular fibrillation, not Brugada type	OLS API EFO lookup	fuzzy	check if valid
+Idiopathic hypogonadotropic hypogonadism	http://purl.obolibrary.org/obo/MONDO_0018555	hypogonadotropic hypogonadism	OLS API EFO lookup	fuzzy	check if valid
+Idiopathic ventricular fibrillation	http://www.orpha.net/ORDO/Orphanet_228140	Idiopathic ventricular fibrillation, not Brugada type	OLS API EFO lookup	match	
 Infantile enterocolitis and monogenic inflammatory bowel disease					
+Infantile nystagmus	http://purl.obolibrary.org/obo/HP_0000639	Nystagmus	OLS API EFO lookup	fuzzy	check if valid
+Inherited bleeding and or platelet disorders	http://purl.obolibrary.org/obo/MONDO_0014386	platelet-type bleeding disorder 18	OLS API EFO lookup	fuzzy	check if valid
+Inherited complement deficiency	http://purl.obolibrary.org/obo/MONDO_0003832	complement deficiency	OLS API EFO lookup	fuzzy	check if valid
 Inherited macular dystrophy	http://www.orpha.net/ORDO/Orphanet_75381	Cystoid macular dystrophy	OLS API EFO lookup	fuzzy	check if valid
 Inherited non-medullary thyroid cancer	http://www.ebi.ac.uk/efo/EFO_1001957	hereditary thyroid gland medullary carcinoma	OLS API EFO lookup	fuzzy	check if valid
-Inherited optic neuropathies	http://www.orpha.net/ORDO/Orphanet_103	Genetic optic atrophy	OLS API EFO lookup	fuzzy	check if valid
-inherited-optic-neuropathies	http://www.ebi.ac.uk/efo/EFO_0005590	steroid inherited metabolic disorder	OLS API EFO lookup	fuzzy	check if valid
-Inherited white matter disorders	http://www.ebi.ac.uk/efo/EFO_0009335	white matter growth measurement	OLS API EFO lookup	fuzzy	check if valid
-inherited-white-matter-disorders	http://www.ebi.ac.uk/efo/EFO_0009335	white matter growth measurement	OLS API EFO lookup	fuzzy	check if valid
+Inherited optic neuropathies					
+Inherited white matter disorders	http://www.ebi.ac.uk/efo/EFO_0004641	white matter integrity	OLS API EFO lookup	fuzzy	check if valid
+Insulin resistance (including lipodystrophy)	http://www.orpha.net/ORDO/Orphanet_181368	Rare insulin-resistance syndrome	OLS API EFO lookup	fuzzy	check if valid
 Intellectual disability	http://purl.obolibrary.org/obo/HP_0001249	intellectual disability	OT Zooma Mappings	match	
 intellectual-disability	http://purl.obolibrary.org/obo/HP_0001249	Intellectual disability	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Balanced translocations with an unusual phenotype	http://www.orpha.net/ORDO/Orphanet_2850	Alopecia-intellectual disability syndrome	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Congenital hearing impairment	http://www.orpha.net/ORDO/Orphanet_2278	Ichthyosis - intellectual disability - dwarfism - renal impairment	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Fallots tetralogy	http://www.orpha.net/ORDO/Orphanet_3304	Fallot complex - intellectual disability - growth delay	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Familial haematuria	http://www.orpha.net/ORDO/Orphanet_1067	Aniridia - ptosis - intellectual disability - familial obesity	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Familial Thoracic Aortic Aneurysm Disease	http://www.orpha.net/ORDO/Orphanet_91387	Familial thoracic aortic aneurysm and aortic dissection	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Malformations of cortical development	http://www.orpha.net/ORDO/Orphanet_2983	Disorder of sex development - intellectual disability	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Retinal dystrophies (+/- other features)	http://www.orpha.net/ORDO/Orphanet_2850	Alopecia-intellectual disability syndrome	OLS API EFO lookup	fuzzy	check if valid
-intellectual disability::syndromic cleft lip and or cleft palate	http://www.orpha.net/ORDO/Orphanet_1473	Uveal coloboma - cleft lip and palate - intellectual disability	OLS API EFO lookup	fuzzy	check if valid
-Intellectual disability::Ultra-rare undescribed monogenic disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
-Intracerebral calcification disorders	http://www.orpha.net/ORDO/Orphanet_1261	Bonnemann-Meinecke-Reich syndrome	OLS API EFO lookup	fuzzy	check if valid
+Intracerebral calcification disorders	http://purl.obolibrary.org/obo/HP_0002514	Cerebral calcification	OLS API EFO lookup	fuzzy	check if valid
 Isomerism and laterality disorders					
 IUGR and IGF abnormalities					
-IUGR and IGF abnormalities::Syndromic cleft lip and or cleft palate	http://www.orpha.net/ORDO/Orphanet_1071	Ankyloblepharon - ectodermal defects - cleft lip/palate	OLS API EFO lookup	fuzzy	check if valid
 Joubert syndrome	http://www.orpha.net/ORDO/Orphanet_475	joubert syndrome	OT Zooma Mappings	match	
 joubert-syndrome	http://www.orpha.net/ORDO/Orphanet_475	joubert syndrome	Zooma API lookup	match	
 Juvenile dermatomyositis	http://www.ebi.ac.uk/efo/EFO_0000557	juvenile dermatomyositis	EFO OBO	match	
 Kabuki syndrome	http://www.orpha.net/ORDO/Orphanet_2322	kabuki syndrome	OT Zooma Mappings	match	
-Ketotic hypoglycaemia	http://www.orpha.net/ORDO/Orphanet_289860	Infantile glycine encephalopathy	OLS API EFO lookup	fuzzy	check if valid
-Kyphoscoliotic Ehlers-Danlos syndrome	http://www.orpha.net/ORDO/Orphanet_1900	Ehlers-Danlos syndrome, kyphoscoliotic type	OLS API EFO lookup	fuzzy	check if valid
+Ketotic hypoglycaemia	http://purl.obolibrary.org/obo/MONDO_0018619	hyperinsulinemic hypoglycaemia	OLS API EFO lookup	fuzzy	check if valid
+ketotic-hypoglycaemia	http://purl.obolibrary.org/obo/MONDO_0018619	hyperinsulinemic hypoglycaemia	OLS API EFO lookup	fuzzy	check if valid
+Kleine-Levin syndrome	http://www.ebi.ac.uk/efo/EFO_1001354	Kleine-Levin Syndrome	OLS API EFO lookup	match	
+Kleine-Levin syndrome and other inherited sleep disorders	http://www.orpha.net/ORDO/Orphanet_758	Pseudoxanthoma elasticum	OLS API EFO lookup	fuzzy	check if valid
+Kyphoscoliotic Ehlers-Danlos syndrome	http://www.orpha.net/ORDO/Orphanet_536545	Kyphoscoliotic Ehlers-Danlos syndrome	OLS API ORDO exact lookup	match	check if in OT
+Lactic acidosis	http://www.ebi.ac.uk/efo/EFO_1000036	lactic acidosis	EFO OBO	match	
 Leber Congenital Amaurosis / Early-Onset Severe Retinal Dystrophy	http://www.orpha.net/ORDO/Orphanet_364055	Severe early-childhood-onset retinal dystrophy	OLS API EFO lookup	fuzzy	check if valid
 Leber Congenital Amaurosis or Early-Onset Severe Retinal Dystrophy	http://www.orpha.net/ORDO/Orphanet_364055	Severe early-childhood-onset retinal dystrophy	OLS API EFO lookup	fuzzy	check if valid
-Leber Congenital Amaurosis or Early-Onset Severe Retinal Dystrophy::Leber Congenital Amaurosis / Early-Onset Severe Retinal Dystrophy	http://www.orpha.net/ORDO/Orphanet_364055	Severe early-childhood-onset retinal dystrophy	OLS API EFO lookup	fuzzy	check if valid
-Left Ventricular Noncompaction Cardiomyopathy	http://purl.obolibrary.org/obo/HP_0011664	Left ventricular noncompaction cardiomyopathy	OLS API HP exact lookup	match	check if in OT
+Left Ventricular Noncompaction Cardiomyopathy	http://www.orpha.net/ORDO/Orphanet_54260	left ventricular noncompaction cardiomyopathy	Zooma API lookup	match	
 Left Ventricular Outflow Tract obstruction disorders	http://www.ebi.ac.uk/efo/EFO_1001448	Ventricular Outflow Obstruction	OLS API EFO lookup	fuzzy	check if valid
-legius syndrome	http://www.orpha.net/ORDO/Orphanet_137605	legius syndrome	OT Zooma Mappings	match	
-Limb girdle muscular dystrophy	http://www.orpha.net/ORDO/Orphanet_263	limb-girdle muscular dystrophy	Zooma API lookup	match	
+Legius syndrome	http://www.orpha.net/ORDO/Orphanet_137605	legius syndrome	OT Zooma Mappings	match	
+LEOPARD syndrome	http://www.orpha.net/ORDO/Orphanet_500	leopard syndrome	OT Zooma Mappings	match	
+Limb girdle muscular dystrophy	http://www.orpha.net/ORDO/Orphanet_263	Limb-girdle muscular dystrophy	OLS API EFO lookup	match	
 Lipoedema disease					
 Long QT syndrome	http://purl.obolibrary.org/obo/HP_0001657	long qt syndrome	Zooma API lookup	match	
-Lymphoedema distichiasis	http://www.orpha.net/ORDO/Orphanet_99177	Isolated distichiasis	OLS API EFO lookup	fuzzy	check if valid
+Lymphoedema distichiasis	http://www.orpha.net/ORDO/Orphanet_33001	Lymphedema - distichiasis	OLS API EFO lookup	fuzzy	check if valid
 Malformations of cortical development	http://www.orpha.net/ORDO/Orphanet_280640	Occipital pachygyria and polymicrogyria	OLS API EFO lookup	fuzzy	check if valid
-malformations-of-cortical-development	http://www.orpha.net/ORDO/Orphanet_280640	Occipital pachygyria and polymicrogyria	OLS API EFO lookup	fuzzy	check if valid
 Meige disease	http://www.orpha.net/ORDO/Orphanet_90186	Meige disease	OLS API EFO lookup	match	
 Milroy disease	http://www.orpha.net/ORDO/Orphanet_79452	Milroy disease	OLS API EFO lookup	match	
-Mitochondrial disorders	http://www.ebi.ac.uk/efo/EFO_0009143	ryr1-related disorders	OLS API EFO lookup	fuzzy	check if valid
+Mitochondrial disorders	http://www.ebi.ac.uk/efo/EFO_0009692	voice disorders	OLS API EFO lookup	fuzzy	check if valid
+Monogenic venous thrombosis	http://purl.obolibrary.org/obo/HP_0004936	Venous thrombosis	OLS API EFO lookup	fuzzy	check if valid
+Moyamoya disease	http://www.orpha.net/ORDO/Orphanet_2573	moyamoya disease	OT Zooma Mappings	match	
 Mucopolysaccharideosis -  Gaucher -  Fabry	http://www.orpha.net/ORDO/Orphanet_324	Fabry disease	OLS API EFO lookup	fuzzy	check if valid
 Mucopolysaccharideosis, Gaucher, Fabry					
-Multiple bowel polyps	http://www.ebi.ac.uk/efo/EFO_1000633	adenomatous colon polyp	OLS API EFO lookup	fuzzy	check if valid
-Multiple bowel polyps::Familial colon cancer	http://www.ebi.ac.uk/efo/EFO_1000633	adenomatous colon polyp	OLS API EFO lookup	fuzzy	check if valid
+Multi-organ autoimmune diabetes	http://www.ebi.ac.uk/efo/EFO_0009756	autoimmune type 1 diabetes	OLS API EFO lookup	fuzzy	check if valid
+Multiple bowel polyps	http://purl.obolibrary.org/obo/MONDO_0000147	polyposis	OLS API EFO lookup	fuzzy	check if valid
 Multiple endocrine tumours	http://www.orpha.net/ORDO/Orphanet_652	Multiple endocrine neoplasia type 1	OLS API EFO lookup	fuzzy	check if valid
-Multiple endocrine tumours::Arrhythmogenic Right Ventricular Cardiomyopathy	http://www.orpha.net/ORDO/Orphanet_247	Arrhythmogenic right ventricular dysplasia	OLS API EFO lookup	fuzzy	check if valid
 Multiple Epiphyseal Dysplasia	http://www.orpha.net/ORDO/Orphanet_251	multiple epiphyseal dysplasia	OT Zooma Mappings	match	
 Multiple Tumours	http://www.ebi.ac.uk/efo/EFO_0009140	metastatic pancreatic neuroendocrine tumours	OLS API EFO lookup	fuzzy	check if valid
+Neonatal cholestasis	http://www.orpha.net/ORDO/Orphanet_247598	Neonatal intrahepatic cholestasis due to citrin deficiency	OLS API EFO lookup	fuzzy	check if valid
 Neonatal or paediatric intensive care admission with a likely monogenic disease	http://www.orpha.net/ORDO/Orphanet_166472	Monogenic disease with epilepsy	OLS API EFO lookup	fuzzy	check if valid
 Neuro-endocrine Tumours- PCC and PGL	http://www.orpha.net/ORDO/Orphanet_29072	Hereditary pheochromocytoma-paraganglioma	OLS API EFO lookup	fuzzy	check if valid
-Neurofibromatosis Type 1	http://www.orpha.net/ORDO/Orphanet_636	Neurofibromatosis type 1	OLS API EFO lookup	match	
-Neurotransmitter disorders	http://www.ebi.ac.uk/efo/EFO_0009143	ryr1-related disorders	OLS API EFO lookup	fuzzy	check if valid
+Neurofibromatosis Type 1	http://www.orpha.net/ORDO/Orphanet_636	Neurofibromatosis type 1	Zooma API lookup	match	
+Neurotransmitter disorders	http://www.ebi.ac.uk/efo/EFO_0009692	voice disorders	OLS API EFO lookup	fuzzy	check if valid
 Non-CF bronchiectasis	http://purl.obolibrary.org/obo/HP_0002110	Bronchiectasis	OLS API EFO lookup	fuzzy	check if valid
 Non-Fanconi anaemia	http://www.ebi.ac.uk/efo/EFO_0009044	Fanconi anemia complementation group A	OLS API EFO lookup	fuzzy	check if valid
+Non-syndromic familial congenital anorectal malformations	http://www.orpha.net/ORDO/Orphanet_91492	Non-syndromic congenital cataract	OLS API EFO lookup	fuzzy	check if valid
+Non-syndromic hypotrichosis	http://www.orpha.net/ORDO/Orphanet_69735	Hypotrichosis - lymphedema - telangiectasia	OLS API EFO lookup	fuzzy	check if valid
 Noonan syndrome	http://www.orpha.net/ORDO/Orphanet_648	noonan syndrome	OT Zooma Mappings	match	
-noonan-syndrome	http://www.orpha.net/ORDO/Orphanet_648	noonan syndrome	Zooma API lookup	match	
 Noonan syndrome plus other features	http://www.orpha.net/ORDO/Orphanet_709	Peters plus syndrome	OLS API EFO lookup	fuzzy	check if valid
 Ocular coloboma	http://www.orpha.net/ORDO/Orphanet_194	Ocular coloboma	OLS API EFO lookup	match	
-ocular-coloboma	http://www.orpha.net/ORDO/Orphanet_194	Ocular coloboma	OLS API EFO lookup	fuzzy	check if valid
 Osteogenesis imperfecta	http://www.orpha.net/ORDO/Orphanet_666	osteogenesis imperfecta	OT Zooma Mappings	match	
-osteogenesis-imperfecta	http://www.orpha.net/ORDO/Orphanet_666	osteogenesis imperfecta	Zooma API lookup	match	
-Other peroxisomal disorders	http://www.orpha.net/ORDO/Orphanet_2971	Peroxisomal acyl-CoA oxidase deficiency	OLS API EFO lookup	fuzzy	check if valid
+Other peroxisomal disorders	http://www.orpha.net/ORDO/Orphanet_68373	Peroxisomal disease	OLS API EFO lookup	fuzzy	check if valid
+Other rare neuromuscular disorders	http://purl.obolibrary.org/obo/MONDO_0015888	other rare diabetes mellitus	OLS API EFO lookup	fuzzy	check if valid
 Paediatric congenital malformation-dysmorphism-tumour sydromes	http://www.ebi.ac.uk/efo/EFO_0005269	congenital heart malformation	OLS API EFO lookup	fuzzy	check if valid
+paediatric-congenital-malformation-dysmorphism-tumour-sydromes	http://www.ebi.ac.uk/efo/EFO_0005269	congenital heart malformation	OLS API EFO lookup	fuzzy	check if valid
 Paediatric congenital malformation-dysmorphism-tumour syndromes	http://www.orpha.net/ORDO/Orphanet_98914	Presynaptic congenital myasthenic syndromes	OLS API EFO lookup	fuzzy	check if valid
-Paediatric motor neuronopathies	http://www.ebi.ac.uk/efo/EFO_0008237	motor development measurement	OLS API EFO lookup	fuzzy	check if valid
+Paediatric motor neuronopathies	http://www.ebi.ac.uk/efo/EFO_1001089	partial motor epilepsy	OLS API EFO lookup	fuzzy	check if valid
+Pain Channelopathies	http://www.ebi.ac.uk/efo/EFO_0003843	pain	OLS API EFO lookup	fuzzy	check if valid
 Palmoplantar keratoderma and erythrokeratodermas					
+Parathyroid cancer	http://www.ebi.ac.uk/efo/EFO_1000456	Parathyroid Gland Carcinoma	OLS API EFO lookup	match	
+Peeling skin syndrome	http://www.orpha.net/ORDO/Orphanet_817	peeling skin syndrome	Zooma API lookup	match	
 Periodic fever syndromes and amyloidosis					
-Peroxisomal disorders (other)	http://www.orpha.net/ORDO/Orphanet_2971	Peroxisomal acyl-CoA oxidase deficiency	OLS API EFO lookup	fuzzy	check if valid
+Peroxisomal biogenesis disorders	http://www.orpha.net/ORDO/Orphanet_68373	peroxisomal biogenesis disorders	OT Zooma Mappings	match	
+Peroxisomal disorders (other)	http://www.orpha.net/ORDO/Orphanet_68373	Peroxisomal disease	OLS API EFO lookup	fuzzy	check if valid
 Peutz-Jeghers syndrome	http://www.orpha.net/ORDO/Orphanet_2869	peutz-jeghers syndrome	OT Zooma Mappings	match	
+PHACE(S) syndrome	http://www.orpha.net/ORDO/Orphanet_42775	PHACE syndrome	OLS API EFO lookup	fuzzy	check if valid
+Pontine tegmental cap dysplasia	http://www.orpha.net/ORDO/Orphanet_269229	Pontine tegmental cap dysplasia	OLS API ORDO exact lookup	match	check if in OT
 Primary ciliary disorders	http://www.orpha.net/ORDO/Orphanet_247522	Primary ciliary dyskinesia - retinitis pigmentosa	OLS API EFO lookup	fuzzy	check if valid
 Primary ciliary dyskinesia	http://www.orpha.net/ORDO/Orphanet_244	primary ciliary dyskinesia	OT Zooma Mappings	match	
-Primary immunodeficiency	http://www.orpha.net/ORDO/Orphanet_101997	Primary immunodeficiency	OLS API EFO lookup	match	
+Primary immunodeficiency	http://www.orpha.net/ORDO/Orphanet_101997	primary immunodeficiency	Zooma API lookup	match	
 Primary lymphoedema	http://www.ebi.ac.uk/efo/EFO_1002032	primary hypertension	OLS API EFO lookup	fuzzy	check if valid
-Primary Microcephaly - Microcephalic Dwarfism Spectrum	http://www.orpha.net/ORDO/Orphanet_2637	Microcephalic osteodysplastic primordial dwarfism type II	OLS API EFO lookup	fuzzy	check if valid
-primary microcephaly microcephalic dwarfism spectrum	http://www.orpha.net/ORDO/Orphanet_2637	Microcephalic osteodysplastic primordial dwarfism type II	OLS API EFO lookup	fuzzy	check if valid
-Proteinuric renal disease	http://www.ebi.ac.uk/efo/EFO_1000647	renal tubular transport disease	OLS API EFO lookup	fuzzy	check if valid
+Primary membranoproliferative glomerulonephritis	http://www.orpha.net/ORDO/Orphanet_54370	Primary membranoproliferative glomerulonephritis	OLS API EFO lookup	match	
+Primary Microcephaly - Microcephalic Dwarfism Spectrum	http://www.orpha.net/ORDO/Orphanet_329228	Microcephalic primordial dwarfism due to ZNF335 deficiency	OLS API EFO lookup	fuzzy	check if valid
+primary microcephaly microcephalic dwarfism spectrum	http://www.orpha.net/ORDO/Orphanet_329228	Microcephalic primordial dwarfism due to ZNF335 deficiency	OLS API EFO lookup	fuzzy	check if valid
+Proteinuric renal disease	http://www.ebi.ac.uk/efo/EFO_0008621	Microcystic Renal Disease	OLS API EFO lookup	fuzzy	check if valid
+Pulmonary arterial hypertension	http://www.ebi.ac.uk/efo/EFO_0001361	pulmonary hypertension	EFO OBO	match	
 Pulmonary atresia	http://purl.obolibrary.org/obo/HP_0004935	Pulmonary artery atresia	OLS API HP exact lookup	match	check if in OT
 Radial dysplasia	http://purl.obolibrary.org/obo/HP_0004059	Radial club hand	OLS API HP exact lookup	match	check if in OT
 Rare multisystem ciliopathy disorders	http://www.ebi.ac.uk/efo/EFO_0003900	ciliopathy	OLS API EFO lookup	fuzzy	check if valid
-Reflux nephropathy	http://www.ebi.ac.uk/efo/EFO_1000838	bile reflux	OLS API EFO lookup	fuzzy	check if valid
-Renal development defects	http://www.ebi.ac.uk/efo/EFO_1001152	renal osteodystrophy	OLS API EFO lookup	fuzzy	check if valid
+Reflux nephropathy	http://www.ebi.ac.uk/efo/EFO_1001355	Laryngopharyngeal Reflux	OLS API EFO lookup	fuzzy	check if valid
+Renal development defects	http://www.orpha.net/ORDO/Orphanet_2549	Oculoauriculovertebral spectrum with radial defects	OLS API EFO lookup	fuzzy	check if valid
+Renal failure / insufficiency, developmental delay, retinopathy, hypomagnesaemia, hypercalciuria, anal stenosis, and autism	http://purl.obolibrary.org/obo/HP_0000083	Renal insufficiency	OLS API EFO lookup	fuzzy	check if valid
 Renal tract calcification (or Nephrolithiasis/nephrocalcinosis)	http://www.ebi.ac.uk/efo/EFO_0003837	calcification	OLS API EFO lookup	fuzzy	check if valid
-Renal tract calcification (or Nephrolithiasis/nephrocalcinosis)::Cystic kidney disease	http://www.ebi.ac.uk/efo/EFO_0008615	Cystic Kidney Disease	OLS API EFO lookup	fuzzy	check if valid
-Renal tract calcification (or Nephrolithiasis/nephrocalcinosis)::Renal tract calcification (or Nephrolithiasis or nephrocalcinosis)	http://www.ebi.ac.uk/efo/EFO_0003837	calcification	OLS API EFO lookup	fuzzy	check if valid
 Renal tract calcification (or Nephrolithiasis or nephrocalcinosis)	http://www.ebi.ac.uk/efo/EFO_0003837	calcification	OLS API EFO lookup	fuzzy	check if valid
-Renal tubular acidosis	http://purl.obolibrary.org/obo/HP_0001947	Renal tubular acidosis	OLS API HP exact lookup	match	check if in OT
+Renal tubular acidosis	http://purl.obolibrary.org/obo/MONDO_0001909	renal tubular acidosis	OLS API EFO lookup	match	
+Resistance to thyroid hormone	http://purl.obolibrary.org/obo/HP_0002930	Impaired sensitivity to thyroid hormone	OLS API HP exact lookup	match	check if in OT
 Retinal dystrophies (+/- other features)	http://www.ebi.ac.uk/efo/EFO_1001157	retinal vein occlusion	OLS API EFO lookup	fuzzy	check if valid
-Rhabdomyolysis and metabolic muscle disorders	http://www.ebi.ac.uk/efo/EFO_0009071	malignant hyperthermia, susceptibility to, 1	OLS API EFO lookup	fuzzy	check if valid
-Rhabdomyolysis and metabolic muscle disorders::Limb girdle muscular dystrophy	http://www.orpha.net/ORDO/Orphanet_263	Limb-girdle muscular dystrophy	OLS API EFO lookup	fuzzy	check if valid
-Rhabdomyolysis and metabolic muscle disorders::Ultra-rare undescribed monogenic disorders	http://www.ebi.ac.uk/efo/EFO_0003867	rhabdomyolysis	OLS API EFO lookup	fuzzy	check if valid
+Rhabdomyolysis and metabolic muscle disorders	http://purl.obolibrary.org/obo/MONDO_0018820	recurrent metabolic encephalomyopathic crises-rhabdomyolysis-cardiac arrhythmia-intellectual disability syndrome	OLS API EFO lookup	fuzzy	check if valid
 Rhomboencephalosynapsis					
-rod cone dystrophy	http://purl.obolibrary.org/obo/HP_0000510	Rod-cone dystrophy	OLS API HP exact lookup	match	check if in OT
-Rod-cone dystrophy	http://purl.obolibrary.org/obo/HP_0000510	Rod-cone dystrophy	OLS API HP exact lookup	match	check if in OT
-Rod Dysfunction Syndrome	http://www.orpha.net/ORDO/Orphanet_2697	Arthrogryposis - renal dysfunction - cholestasis	OLS API EFO lookup	fuzzy	check if valid
+rod cone dystrophy	http://www.orpha.net/ORDO/Orphanet_1872	rod-cone dystrophy	Zooma API lookup	match	
+Rod-cone dystrophy	http://www.orpha.net/ORDO/Orphanet_1872	rod-cone dystrophy	Zooma API lookup	match	
+Rod Dysfunction Syndrome	http://purl.obolibrary.org/obo/MONDO_0000152	thiamine-responsive dysfunction syndrome	OLS API EFO lookup	fuzzy	check if valid
+Schizophrenia plus additional features	http://www.ebi.ac.uk/efo/EFO_0000692	schizophrenia	OLS API EFO lookup	fuzzy	check if valid
+SCID	http://www.orpha.net/ORDO/Orphanet_183660	Severe combined immunodeficiency	OLS API EFO lookup	match	
 Severe familial anorexia	http://www.ebi.ac.uk/efo/EFO_0004215	anorexia nervosa	OLS API EFO lookup	fuzzy	check if valid
 Severe hypertriglyceridaemia	http://www.ebi.ac.uk/efo/EFO_0006927	severe aplastic anemia	OLS API EFO lookup	fuzzy	check if valid
 Severe multi-system atopic disease with high IgE	http://www.ebi.ac.uk/efo/EFO_0000274	atopic eczema	OLS API EFO lookup	fuzzy	check if valid
+Short QT syndrome	http://www.orpha.net/ORDO/Orphanet_51083	Familial short QT syndrome	OLS API EFO lookup	match	
 Significant early-onset obesity +/- other endocrine features and short stature					
 significant early onset obesity with or without other endocrine features and short stature	http://www.ebi.ac.uk/efo/EFO_0009031	Cognitive impairment-coarse facies-heart defects-obesity-pulmonary involvement-short stature-skeletal dysplasia syndrome	OLS API EFO lookup	fuzzy	check if valid
 Significant early-onset obesity with or without other endocrine features and short stature	http://www.ebi.ac.uk/efo/EFO_0009031	Cognitive impairment-coarse facies-heart defects-obesity-pulmonary involvement-short stature-skeletal dysplasia syndrome	OLS API EFO lookup	fuzzy	check if valid
@@ -241,17 +276,24 @@ Sotos syndrome	http://www.orpha.net/ORDO/Orphanet_821	sotos syndrome	OT Zooma Ma
 Stickler syndrome	http://www.orpha.net/ORDO/Orphanet_828	stickler syndrome	OT Zooma Mappings	match	
 Structural basal ganglia disorders	http://www.ebi.ac.uk/efo/EFO_0009325	basal ganglia growth measurement	OLS API EFO lookup	fuzzy	check if valid
 Syndromic cleft lip and or cleft palate	http://purl.obolibrary.org/obo/HP_0000175	cleft palate	OLS API EFO lookup	fuzzy	check if valid
-Syndromic congenital heart disease	http://www.ebi.ac.uk/efo/EFO_0005207	congenital heart disease	OLS API EFO lookup	fuzzy	check if valid
-Thoracic dystrophies	http://www.ebi.ac.uk/efo/EFO_0005617	thoracic aortic fatty streak	OLS API EFO lookup	fuzzy	check if valid
-Transposition of the great vessels	http://www.orpha.net/ORDO/Orphanet_216675	Transposition of the great arteries	OLS API ORDO exact lookup	match	check if in OT
+Syndromic congenital heart disease	http://www.ebi.ac.uk/efo/EFO_0005269	congenital heart malformation	OLS API EFO lookup	fuzzy	check if valid
+Thoracic dystrophies	http://www.ebi.ac.uk/efo/EFO_0004282	thoracic aortic aneurysm	OLS API EFO lookup	fuzzy	check if valid
+Transposition of the great vessels	http://purl.obolibrary.org/obo/MONDO_0000153	transposition of the great arteries	OLS API EFO lookup	match	
 ultra rare undescribed monogenic disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
 Ultra-rare undescribed monogenic disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
+ultra-rare-undescribed-monogenic-disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
 Undiagnosed metabolic disorders	http://www.ebi.ac.uk/efo/EFO_0000589	metabolic disease	OLS API EFO lookup	fuzzy	check if valid
 Undiagnosed monogenic disorder seen in a specialist genetics clinic	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
-Undiagnosed neurocutaneous disorders	http://www.orpha.net/ORDO/Orphanet_166466	Neurocutaneous syndrome with epilepsy	OLS API EFO lookup	fuzzy	check if valid
-Unexplained kidney failure in young people	http://www.ebi.ac.uk/efo/EFO_0003884	chronic kidney disease	OLS API EFO lookup	fuzzy	check if valid
+Undiagnosed monogenic disorder seen in specialist genetics clinic	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
+Undiagnosed neurocutaneous disorders	http://purl.obolibrary.org/obo/MONDO_0042983	neurocutaneous syndrome	OLS API EFO lookup	fuzzy	check if valid
+Unexplained kidney failure in young people	http://www.ebi.ac.uk/efo/EFO_1002048	kidney failure	OLS API EFO lookup	fuzzy	check if valid
 Unexplained monogenic fetal disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
-unexplained-monogenic-fetal-disorders	http://www.ebi.ac.uk/efo/EFO_1001511	monogenic diabetes	OLS API EFO lookup	fuzzy	check if valid
 Unexplained skeletal dysplasia	http://purl.obolibrary.org/obo/HP_0002652	Skeletal dysplasia	OLS API EFO lookup	fuzzy	check if valid
+Unexplained sudden death in the young	http://www.ebi.ac.uk/efo/EFO_0005303	sudden infant death syndrome	OLS API EFO lookup	fuzzy	check if valid
+unknown	http://www.orpha.net/ORDO/Orphanet_84096	Unknown leukodystrophy	OLS API EFO lookup	fuzzy	check if valid
+vacterl like phenotypes	http://www.orpha.net/ORDO/Orphanet_887	VACTERL/VATER association	OLS API EFO lookup	fuzzy	check if valid
 VACTERL-like phenotypes	http://www.orpha.net/ORDO/Orphanet_887	VACTERL/VATER association	OLS API EFO lookup	fuzzy	check if valid
+Vein of Galen malformation	http://purl.obolibrary.org/obo/HP_0030713	Vein of Galen aneurysmal malformation	OLS API HP exact lookup	match	check if in OT
+Vici Syndrome and other autophagy disorders	http://www.ebi.ac.uk/efo/EFO_0003757	Asperger syndrome	OLS API EFO lookup	fuzzy	check if valid
 Weaver syndrome	http://www.orpha.net/ORDO/Orphanet_3447	weaver syndrome	OT Zooma Mappings	match	
+Xeroderma Pigmentosum-like disorders	http://www.orpha.net/ORDO/Orphanet_910	Xeroderma pigmentosum	OLS API EFO lookup	fuzzy	check if valid
