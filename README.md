@@ -23,7 +23,7 @@ Extract the `rare_diseases_pedigree_member` table from LabKey and save as a TSV.
 ### Filtering participants
 
 If some participants need to be removed (e.g. the TracerX set), create a file containing them, one per line, and specify this via the --filter-participants to both `gel_tiering_to_ot.py` and `gel_questionnaire_to_ot.py`. 
-A TSV file containing the TracerX participants can be created in LabKey from the `normalised_consent` column in the `particiapant` table via http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=participant&query.columns=participant_id%2Cnormalised_consent_form&query.normalised_consent_form~eq=cohort-tracerx - note the prefix will change per data release.
+A TSV file containing the TracerX participants can be created in LabKey from the `normalised_consent` column in the `participant` table via http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=participant&query.columns=participant_id%2Cnormalised_consent_form&query.normalised_consent_form~eq=cohort-tracerx - note the prefix will change per data release.
 
 ### Novel variants
 
