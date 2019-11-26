@@ -36,7 +36,7 @@ def main():
 
     logger.info("Reading TSV from " + args.input)
 
-    required_columns = ["sample_id", "phenotype", "db_snp_id", "tier", "ensembl_id",
+    required_columns = ["sample_id", "phenotype", "tier", "ensembl_id",
                         "genomic_feature_hgnc", "consequence_type", "participant_id", "participant_type",
                         "genotype", "mode_of_inheritance", "rare_diseases_family_id"]
 
@@ -128,8 +128,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
             "sample_id": row['sample_id'],
             "participant_id": row['participant_id'],
             "gene": row['ensembl_id'],
-            "phenotype": phenotype,
-            "variant": row['db_snp_id']
+            "phenotype": phenotype
         },
         "target": {
             "id": "http://identifiers.org/ensembl/" + row['ensembl_id'],
