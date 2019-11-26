@@ -6,18 +6,14 @@ import csv
 import json
 import logging
 import sys
-import re
-import itertools
 import gel_utils
 
 SOURCE_ID = "genomics_england_tiering"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
-DATABASE_VERSION = "6"  # Change if version changes
-ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
-SNP_REGEXP = "rs[0-9]{1,}"  # TODO - support more SNP types
+DATABASE_VERSION = "8"  # Change if version changes
+ASSERTION_DATE = "2019-11-28T23:00:00"  # Change to date of data release
 LABKEY_PARTICIPANT_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v5.1_2018-11-20/executeQuery.view?schemaName=lists&query.queryName=participant&query.participant_id~eq={participant_id}"
-FAKE_RS_ID_BASE = 2000000000  # Number to start fake rsIDs at
 SCHEMA_VERSION = "1.6.0"  # Open Targets JSON schema version
 
 
@@ -55,8 +51,6 @@ def main():
 
     affected_map = build_affected_map(args.pedigree)
 
-    fake_rs_counter = itertools.count(start=FAKE_RS_ID_BASE)
-
     if args.filter_participants:
         participants_to_filter = gel_utils.read_participants_to_filter(args.filter_participants, logger)
     else:
@@ -82,13 +76,12 @@ def main():
                 row['consequence_type'] = row['consequence_type'].split(',')[0]
 
             my_instance = build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row,
-                                                        fake_rs_counter, unknown_phenotypes, unknown_consequences)
+                                                        unknown_phenotypes, unknown_consequences)
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
 
     logger.info("Processed %d objects" % count)
-    logger.info("Generated synthetic rsIDs for %d entries" % (next(fake_rs_counter) - FAKE_RS_ID_BASE))
     logger.info("%d phenotypes were not found:" % len(unknown_phenotypes))
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
@@ -97,7 +90,7 @@ def main():
         logger.info(consequence)
 
 
-def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row, fake_rs_counter,
+def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, row,
                                   unknown_phenotypes, unknown_consequences):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
@@ -105,16 +98,6 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
     """
 
     logger = logging.getLogger(__name__)
-
-    novel_snp = False
-    if not re.match(SNP_REGEXP, row['db_snp_id']):
-        original_rsid = row['db_snp_id']
-        novel_snp = True
-        row['db_snp_id'] = "rs%d" % next(fake_rs_counter)
-        logger.debug(
-            "Record with sample ID %s, Ensembl ID %s and phenotype %s has variant %s which does not match the list of allowed types, so generating fake rsID %s" % (
-                row['sample_id'], row['ensembl_id'],
-                row['phenotype'], original_rsid, row['db_snp_id']))
 
     if row['consequence_type'] not in consequence_map:
         unknown_consequences.add(row['consequence_type'])
@@ -131,7 +114,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
 
     gel_link = LABKEY_PARTICIPANT_LINK_TEMPLATE.format(participant_id=row['participant_id'])
 
-    link_text = build_link_text(row, affected_map, novel_snp)
+    link_text = build_link_text(row, affected_map)
 
     score = tier_to_score(row['tier'])
 
@@ -159,7 +142,7 @@ def build_evidence_strings_object(consequence_map, phenotype_map, affected_map, 
         },
         "type": "genetic_association",
         "variant": {
-            "id": "http://identifiers.org/dbsnp/" + row['db_snp_id'],
+            "id": "http://identifiers.org/dbsnp/rs0",
             "type": "snp single"
         },
         "evidence": {
@@ -261,23 +244,21 @@ def build_affected_map(filename):
     return affected_map
 
 
-def build_link_text(row, affected_map, novel_snp):
+def build_link_text(row, affected_map):
     """
     Build text that is displayed on participant link, e.g.
     GeL TIER2  monoallelic_not_imprinted variant for family G105275; participant 113001766 (affected) is heterozygous.
     :param row: dict of columns in current evidence line
     :param affected_map: dict of participant_id:affected status
-    :param novel_snp: whether this SNP is novel or not
     :return: String of text
     """
     pid = row['participant_id']
 
     affected = affected_map.get(pid, "unknown")
 
-    text = "GeL {tier} {mode} {snp_status} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
+    text = "GeL {tier} {mode} variant for family {family}; participant {participant} ({affected}) is {genotype}".format(
         tier=row['tier'],
         genotype=row['genotype'].replace('_', ' '),
-        snp_status="novel" if novel_snp else "known",
         family=row['rare_diseases_family_id'],
         participant=pid,
         affected=affected,
