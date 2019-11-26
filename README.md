@@ -18,7 +18,7 @@ Both scripts need to have a set of mappings from disease name to EFO term; by de
 
 1. Extract relevant data from `tiering_data` table in LabKey, save as TSV. Only rows from `tiering_data` with the `Tier` field having a value of `TIER1` or `TIER2` should be used.
 
-2. Extract relevant data from `gmc_exit_questionnaire` table in LabKey, save as TSV. Currently the whole table is used.
+2. Extract relevant data from `rare_diseases_participant_disease` table in LabKey, save as TSV. Currently the whole table is used.
 
 3. Extract phenotypes as strings from the tiering TSV file file (including removing blank lines)
 
@@ -26,7 +26,7 @@ Both scripts need to have a set of mappings from disease name to EFO term; by de
 
 4. Extract phenotypes from the exit questionnaire data
 
-`tail -n +2 gmc_exit_questionnaire.tsv | cut -d$'\t' -f 13 > question_phenotypes.txt`
+`tail -n +2 rare_diseases_participant_disease.tsv | cut -d$'\t' -f 8 > question_phenotypes.txt`
 
 5. Produce a unique set of phenotypes and remove blank lines
 
