@@ -11,9 +11,9 @@ import gel_utils
 SOURCE_ID = "genomics_england_questionnaire"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
-DATABASE_VERSION = "6"  # Change if version changes
-ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
-LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}&query.phenotypes_explained~eq={phenotype}"
+DATABASE_VERSION = "8"  # Change if version changes
+ASSERTION_DATE = "2019-11-28T23:00:00"  # Change to date of data release
+LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v8_2019-11-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.participant_id~eq={participant}"
 SCHEMA_VERSION = "1.6.0"  # Open Targets JSON schema version
 
 
@@ -22,8 +22,10 @@ def main():
 
     parser.add_argument('--input', help="Questionnaire data TSV input file", required=True, action='store')
 
-    parser.add_argument('--tiering', help="Tiering data TSV input file, required for variant:gene mapping",
+    parser.add_argument('--hgnc_to_ensembl', help="File containing a list of HGNC symbol to Ensembl gene ID mappings",
                         required=True, action='store')
+
+    # TODO - add argument for rare_diseases_participant_disease file
 
     parser.add_argument('--filter_participants', help="List of participants to filter out", required=False, action='store')
 
@@ -35,8 +37,8 @@ def main():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.getLevelName(args.log_level))
 
-    required_columns = ["participant_id", "family_id", "phenotypes_explained", "chromosome", "position", "reference",
-                        "alternate", "acmg_classification", "actionability", "case_solved_family"]
+    required_columns = ["participant_id", "family_id", "chromosome", "position", "reference",
+                        "alternate", "acmg_classification", "actionability", "case_solved_family", "gene_name"]
 
     count = 0
 
@@ -46,10 +48,8 @@ def main():
     gel_utils.apply_phenotype_mapping_overrides(phenotype_map)
 
     # Read tiering data to get variant:ensembl gene mapping
-    variant_to_gene = read_variant_to_gene_map_from_tiering(args.tiering)
-    logger.debug('Read {} variant:gene mappings'.format(len(variant_to_gene)))
-
-    unknown_variants = set()
+    hgnc_to_ensembl = read_hgnc_to_ensembl_mapping(args.hgnc_to_ensembl)
+    logger.debug('Read {} HGNC:Ensembl mappings'.format(len(hgnc_to_ensembl)))
 
     if args.filter_participants:
         participants_to_filter = gel_utils.read_participants_to_filter(args.filter_participants, logger)
@@ -70,12 +70,11 @@ def main():
                 sys.exit(1)
 
         for row in reader:
-
             if row['participant_id'] in participants_to_filter:
                 continue
 
-            my_instance = build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene,
-                                                        unknown_variants)
+            my_instance = build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, hgnc_to_ensembl)
+
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -84,12 +83,8 @@ def main():
     logger.info("{} phenotypes were not found:".format(len(unknown_phenotypes)))
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
-    logger.info("{} variants could not be mapped to genes and were skipped:".format(len(unknown_variants)))
-    for variant in unknown_variants:
-        logger.info(variant)
 
-
-def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene, unknown_variants):
+def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, hgnc_to_ensembl):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -110,15 +105,24 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     clinical_significance = row['acmg_classification']
 
-    variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))  # matches format in map
-    if variant not in variant_to_gene:
-        unknown_variants.add(variant)
+    if row['gene_name'] == 'NA':
+        # TODO record number of NAs / missed lookups
         return
-    else:
-        gene = variant_to_gene[variant]
 
-    # Link to LabKey based on participant, variant and phenotype
-    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id, phenotype=phenotype)
+    # Only use first gene name if there are multiples separated by ;
+    gene_name = row['gene_name'].split(';')[0]
+
+    if gene_name not in hgnc_to_ensembl:
+        print "No Ensembl ID found for HGNC symbol " + row['gene_name']
+        # TODO what to do here?
+    else:
+        gene = hgnc_to_ensembl[gene_name]
+
+    # Build composite variant
+    variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))  # matches format in map
+
+    # Link to LabKey based on participant only
+    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(participant=participant_id)
 
     link_text = build_link_text(row)
 
@@ -219,22 +223,20 @@ def build_link_text(row):
     return text
 
 
-def read_variant_to_gene_map_from_tiering(tiering_file_name):
+def read_hgnc_to_ensembl_mapping(hgnc_to_ensembl_file_name):
     """
-    Build a map of variants (in the form chr:pos:ref:alt) to genes (Ensembl IDs) by reading tiering data.
-    :param tiering_file_name: Name of tiering file.
-    :return: Map of variants to gene identifiers.
+    Build a map of HGNC symbols (used in GEL questionnaire data) to Ensembl gene IDs (used in Open Targets).
+    :param hgnc_to_ensembl_file_name: Name of mapping file.
+    :return: Map of HGNC to Ensembl identifiers.
     """
-    variant_to_gene = {}
+    hgnc_to_ensembl = {}
 
-    with open(tiering_file_name) as tiering_tsv_file:
-        reader = csv.DictReader(tiering_tsv_file, delimiter='\t')
+    with open(hgnc_to_ensembl_file_name, 'r') as mapping_file:
+        for line in mapping_file:
+            (hgnc, ensembl) = line.split()
+            hgnc_to_ensembl[hgnc] = ensembl
 
-        for row in reader:
-            variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))
-            variant_to_gene[variant] = row['ensembl_id']
-
-    return variant_to_gene
+    return hgnc_to_ensembl
 
 
 if __name__ == '__main__':
