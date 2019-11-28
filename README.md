@@ -37,7 +37,7 @@ Currently the Open Targets schema requires that all genetic associations have va
 
 ### Rare disease tiering data
 
-`python gel_tiering_to_ot.py --input sample.tsv --pedigree sample_pedigree.tsv`
+`python gel_tiering_to_ot.py --input test_data.tsv --pedigree sample_pedigree.tsv`
 
 ### GMC Exit Questionnaire data
 
