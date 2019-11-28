@@ -39,3 +39,5 @@ filter_array = [ labkey.query.QueryFilter('tier', 'TIER1;TIER2', 'in') ]
 
 labkey_to_api("tiering_data", "tiering_data.tsv", filter_array, server_context)
 
+labkey_to_api("rare_diseases_participant_disease", "rare_diseases_participant_disease.tsv", [], server_context)
+
