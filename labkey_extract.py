@@ -9,7 +9,7 @@ import labkey
 import pandas as pd
 
 LABKEY_SERVER = "emb-prod-mre-labkey-01.gel.zone:8080"
-RELEASE_PATH = "main-programme/main-programme_v7_2019-11-28"
+RELEASE_PATH = "main-programme/main-programme_v8_2019-11-28"
 
 def labkey_to_api(table, filename, filter_array, server_context):
 
