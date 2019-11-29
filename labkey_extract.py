@@ -31,7 +31,7 @@ print "Connecting to LabKey on " + LABKEY_SERVER + " " + RELEASE_PATH
 
 server_context = labkey.utils.create_server_context(LABKEY_SERVER, RELEASE_PATH, 'labkey', use_ssl=False)
 
-labkey_to_api("gmc_exit_questionnaire", "question.tsv", [], server_context)
+labkey_to_api("gmc_exit_questionnaire", "gmc_exit_questionnaire.tsv", [], server_context)
 
 labkey_to_api("rare_diseases_pedigree_member", "rare_diseases_pedigree_member.tsv", [], server_context)
 
