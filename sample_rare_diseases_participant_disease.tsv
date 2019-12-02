@@ -1,0 +1,5 @@
+participant_id	participant_sk	diagnosis_date	age_of_onset	normalised_age_of_onset	disease_group	disease_sub_group	specific_disease	normalised_specific_disease	normalised_disease_sub_group	normalised_disease_group
+1234	77	2015-06-09	-999		Neurology and neurodevelopmental disorders	Neurodevelopmental disorders	Epileptic encephalopathy	Epileptic encephalopathy	Neurodevelopmental disorders	Neurology and neurodevelopmental disorders
+1235	80	2015-07-26	-999		Dermatological disorders	Atopy	Seizures	Seizures	Atopy	Dermatological disorders
+111	83	2015-08-02	-999		Dermatological disorders	Atopy	Charcot-Marie-Tooth disease	Charcot-Marie-Tooth disease	Atopy	Dermatological disorders
+112	84	2015-08-02	-999		Dermatological disorders	Atopy	Severe multi-system atopic disease with high IgE	Severe multi-system atopic disease with high IgE	Atopy	Dermatological disorders
