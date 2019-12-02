@@ -11,9 +11,9 @@ import gel_utils
 SOURCE_ID = "genomics_england_questionnaire"
 PHENOTYPE_MAPPING_FILE = "phenotypes_text_to_efo.txt"
 DATABASE_ID = "genomics_england_main_programme"
-DATABASE_VERSION = "6"  # Change if version changes
-ASSERTION_DATE = "2019-02-28T23:00:00"  # Change to date of data release
-LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v6_2019-02-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.variant_details~eq={variant}&query.participant_id~eq={participant}&query.phenotypes_explained~eq={phenotype}"
+DATABASE_VERSION = "8"  # Change if version changes
+ASSERTION_DATE = "2019-11-28T23:00:00"  # Change to date of data release
+LABKEY_QUESTIONNAIRE_LINK_TEMPLATE = "http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v8_2019-11-28/executeQuery.view?schemaName=lists&query.queryName=gmc_exit_questionnaire&query.participant_id~eq={participant}"
 SCHEMA_VERSION = "1.6.0"  # Open Targets JSON schema version
 
 
@@ -22,8 +22,10 @@ def main():
 
     parser.add_argument('--input', help="Questionnaire data TSV input file", required=True, action='store')
 
-    parser.add_argument('--tiering', help="Tiering data TSV input file, required for variant:gene mapping",
+    parser.add_argument('--hgnc_to_ensembl', help="File containing a list of HGNC symbol to Ensembl gene ID mappings",
                         required=True, action='store')
+
+    parser.add_argument('--disease_file', help="File containing list of participant to disease mappings", required=True, action='store')
 
     parser.add_argument('--filter_participants', help="List of participants to filter out", required=False, action='store')
 
@@ -35,21 +37,23 @@ def main():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.getLevelName(args.log_level))
 
-    required_columns = ["participant_id", "family_id", "phenotypes_explained", "chromosome", "position", "reference",
-                        "alternate", "acmg_classification", "actionability", "case_solved_family"]
+    required_columns = ["participant_id", "family_id", "chromosome", "position", "reference",
+                        "alternate", "acmg_classification", "actionability", "case_solved_family", "gene_name"]
 
     count = 0
+
+    participant_to_disease = read_diseases_from_file(args.disease_file)
 
     unknown_phenotypes = set()
 
     phenotype_map = gel_utils.read_phenotype_to_efo_mapping(PHENOTYPE_MAPPING_FILE)
     gel_utils.apply_phenotype_mapping_overrides(phenotype_map)
 
-    # Read tiering data to get variant:ensembl gene mapping
-    variant_to_gene = read_variant_to_gene_map_from_tiering(args.tiering)
-    logger.debug('Read {} variant:gene mappings'.format(len(variant_to_gene)))
+    acmg_to_clinical_significance = build_acmg_to_clinical_significance_map()
 
-    unknown_variants = set()
+    # Read tiering data to get variant:ensembl gene mapping
+    hgnc_to_ensembl = read_hgnc_to_ensembl_mapping(args.hgnc_to_ensembl)
+    logger.debug('Read {} HGNC:Ensembl mappings'.format(len(hgnc_to_ensembl)))
 
     if args.filter_participants:
         participants_to_filter = gel_utils.read_participants_to_filter(args.filter_participants, logger)
@@ -70,12 +74,11 @@ def main():
                 sys.exit(1)
 
         for row in reader:
-
             if row['participant_id'] in participants_to_filter:
                 continue
 
-            my_instance = build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene,
-                                                        unknown_variants)
+            my_instance = build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, hgnc_to_ensembl, participant_to_disease, acmg_to_clinical_significance)
+
             if my_instance:
                 print(json.dumps(my_instance))
                 count += 1
@@ -84,12 +87,9 @@ def main():
     logger.info("{} phenotypes were not found:".format(len(unknown_phenotypes)))
     for phenotype in unknown_phenotypes:
         logger.info(phenotype)
-    logger.info("{} variants could not be mapped to genes and were skipped:".format(len(unknown_variants)))
-    for variant in unknown_variants:
-        logger.info(variant)
 
 
-def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, variant_to_gene, unknown_variants):
+def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, hgnc_to_ensembl, participant_to_disease, acmg_to_clinical_significance):
     """
     Build a Python object containing the correct structure to match the Open Targets genetics.json schema
     :return:
@@ -99,7 +99,13 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     participant_id = row['participant_id']
 
-    phenotype = row['phenotypes_explained'].strip()
+    if participant_id not in participant_to_disease:
+        logger.warn("Participant " + participant_id + " has no associated disease")
+        # TODO - record these?
+        return
+
+    phenotype = participant_to_disease[participant_id]
+
     if phenotype not in phenotype_map:
         unknown_phenotypes.add(phenotype)
         return
@@ -108,17 +114,26 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
 
     score = 1  # TODO different score based on positive or negative result - e.g. 0 or skip entirely if phenotypes_solved is "no"?
 
-    clinical_significance = row['acmg_classification']
+    clinical_significance = acmg_to_clinical_significance[row['acmg_classification']]
 
-    variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))  # matches format in map
-    if variant not in variant_to_gene:
-        unknown_variants.add(variant)
+    if row['gene_name'] == 'NA':
+        # TODO record number of NAs / missed lookups
+        return
+
+    # Only use first gene name if there are multiples separated by ;
+    gene_name = row['gene_name'].split(';')[0]
+
+    if gene_name not in hgnc_to_ensembl:
+        logger.warn("No Ensembl ID found for HGNC symbol " + row['gene_name'] + ", skipping")
         return
     else:
-        gene = variant_to_gene[variant]
+        gene = hgnc_to_ensembl[gene_name]
 
-    # Link to LabKey based on participant, variant and phenotype
-    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(variant=variant, participant=participant_id, phenotype=phenotype)
+    # Build composite variant
+    variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))  # matches format in map
+
+    # Link to LabKey based on participant only
+    gel_link = LABKEY_QUESTIONNAIRE_LINK_TEMPLATE.format(participant=participant_id)
 
     link_text = build_link_text(row)
 
@@ -143,13 +158,15 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
         },
         "type": "genetic_association",
         "variant": {
-            "id": variant,
+            "id": "http://identifiers.org/dbsnp/rs0",
             "type": "snp single"
         },
         "evidence": {
             "gene2variant": {
                 "is_associated": True,
                 "date_asserted": ASSERTION_DATE,
+                # TODO Placeholder - functional consquence (as a URI) is required bu the schema but is not included in the questionnaire data
+                "functional_consequence": "http://unknown",
                 "provenance_type": {
                     "database": {
                         "id": DATABASE_ID,
@@ -168,7 +185,7 @@ def build_evidence_strings_object(row, phenotype_map, unknown_phenotypes, varian
             },
             "variant2disease": {
                 # TODO check that this is actually unique
-                "unique_experiment_reference": participant_id + variant + phenotype,
+                "unique_experiment_reference": "STUDYID_" + participant_id + variant + phenotype,
                 "is_associated": True,
                 "date_asserted": ASSERTION_DATE,
                 "resource_score": {
@@ -219,22 +236,75 @@ def build_link_text(row):
     return text
 
 
-def read_variant_to_gene_map_from_tiering(tiering_file_name):
+def read_hgnc_to_ensembl_mapping(hgnc_to_ensembl_file_name):
     """
-    Build a map of variants (in the form chr:pos:ref:alt) to genes (Ensembl IDs) by reading tiering data.
-    :param tiering_file_name: Name of tiering file.
-    :return: Map of variants to gene identifiers.
+    Build a map of HGNC symbols (used in GEL questionnaire data) to Ensembl gene IDs (used in Open Targets).
+    :param hgnc_to_ensembl_file_name: Name of mapping file.
+    :return: Map of HGNC to Ensembl identifiers.
     """
-    variant_to_gene = {}
+    hgnc_to_ensembl = {}
 
-    with open(tiering_file_name) as tiering_tsv_file:
-        reader = csv.DictReader(tiering_tsv_file, delimiter='\t')
+    with open(hgnc_to_ensembl_file_name, 'r') as mapping_file:
+        for line in mapping_file:
+            (hgnc, ensembl) = line.split()
+            hgnc_to_ensembl[hgnc] = ensembl
+
+    return hgnc_to_ensembl
+
+
+def read_diseases_from_file(participant_to_disease_file_name):
+    """
+    Build a map of participants to diseases from the rare_diseases_participant_disease file.
+    :param participant_to_disease_file_name: Name of mapping file.
+    :return: Map of participant IDs to diseases.
+    """
+    participant_to_disease = {}
+
+    with open(participant_to_disease_file_name, 'r') as mapping_file:
+
+        reader = csv.DictReader(mapping_file, delimiter='\t')
 
         for row in reader:
-            variant = ':'.join((row['chromosome'], row['position'], row['reference'], row['alternate']))
-            variant_to_gene[variant] = row['ensembl_id']
+            participant_to_disease[row['participant_id']] = row['normalised_specific_disease']
 
-    return variant_to_gene
+    return participant_to_disease
+
+
+def build_acmg_to_clinical_significance_map():
+    """
+    Translate the ACMG classification from the GEL data into one of the values allowed by the Open Targets schema.
+    :return: Map containing the closest match between the GEL values and the allowed values.
+    """
+
+    # Values from GEL data
+    #   benign_variant
+    #   likely_benign_variant
+    #   likely_pathogenic_variant
+    #   NA
+    #   not_assessed
+    #   pathogenic_variant
+    #   variant_of_unknown_clinical_significance
+    #
+    # Values allowed by schema:
+    #   Pathogenic
+    #   Likely pathogenic
+    #   protective
+    #   association
+    #   risk_factor
+    #   Affects
+    #   drug response
+
+    acmg_to_clinical_significance = {
+        "pathogenic_variant": "Pathogenic",
+        "likely_pathogenic_variant": "risk_factor",
+        "benign_variant": "association",
+        "likely_benign_variant": "association",
+        "NA": "association",
+        "not_assessed": "association",
+        "variant_of_unknown_clinical_significance": "association",
+    }
+
+    return acmg_to_clinical_significance
 
 
 if __name__ == '__main__':
