@@ -1,10 +1,10 @@
-ensembl_id	db_snp_id	phenotype	tier	consequence_type	sample_id	genomic_feature_hgnc	participant_id	participant_type	genotype	mode_of_inheritance	rare_diseases_family_id	chromosome	position	reference	alternate
-ENSG00000187498	rs773791331	Proteinuric renal disease	tier1	splice_region_variant	LP0000001_DNA_A01	COL4A1	1234	Proband	heterozygous	biallelic	1234	1	72220841	A	C
-ENSG00000136068	rs544099876	Early onset and familial Parkinson's Disease	tier1	missense_variant	LP0000002_DNA_A01	FLNB	1235	Proband	heterozygous	mitochondrial	1234	2	12820841	G	T
-ENSG00000122126	rs61752971	Epileptic encephalopathy	tier2	splice_region_variant	LP0000003_DNA_A01	PLP1	1236	Proband	reference_homozygous	monoallelic_not_imprinted	1234	2	12820841	G	A
-ENSG00000123560	.	Mitochondrial disorders	tier2	splice_region_variant	LP0000004_DNA_A01	PLP1	1111	Proband	alternate_homozygous	xlinked_monoalleic	545655	2	12820841	G	C
-ENSG00000198947	.	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	35356547	2	12820841	G	T
-ENSG00000198947	rs201341211	Unknown phenotype 1	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	9999	Proband	reference_homozygous	xlinked_monoallelic	546525	2	12820841	A	T
-ENSG00000198947	.	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	4879898	2	12820841	A	T
-ENSG00000198947	.	Unknown phenotype 2	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	78998	2	12820841	C	T
-															
+ensembl_id	phenotype	tier	consequence_type	sample_id	genomic_feature_hgnc	participant_id	participant_type	genotype	mode_of_inheritance	rare_diseases_family_id	chromosome	position	reference	alternate
+ENSG00000187498	Proteinuric renal disease	tier1	splice_region_variant	LP0000001_DNA_A01	COL4A1	1234	Proband	heterozygous	biallelic	1234	1	72220841	A	C
+ENSG00000136068	Early onset and familial Parkinson's Disease	tier1	missense_variant	LP0000002_DNA_A01	FLNB	1235	Proband	heterozygous	mitochondrial	1234	2	12820841	G	T
+ENSG00000122126	Epileptic encephalopathy	tier2	splice_region_variant	LP0000003_DNA_A01	PLP1	1236	Proband	reference_homozygous	monoallelic_not_imprinted	1234	2	12820841	G	A
+ENSG00000123560	Mitochondrial disorders	tier2	splice_region_variant	LP0000004_DNA_A01	PLP1	1111	Proband	alternate_homozygous	xlinked_monoalleic	545655	2	12820841	G	C
+ENSG00000198947	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	35356547	2	12820841	G	T
+ENSG00000198947	Unknown phenotype 1	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	9999	Proband	reference_homozygous	xlinked_monoallelic	546525	2	12820841	A	T
+ENSG00000198947	Dilated Cardiomyopathy	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	4879898	2	12820841	A	T
+ENSG00000198947	Unknown phenotype 2	tier1	missense_variant,stop_gained	LP0000005_DNA_A01	DMD	334234	Mother	heterozygous	biallelic	78998	2	12820841	C	T
+														

@@ -9,7 +9,7 @@ import labkey
 import pandas as pd
 
 LABKEY_SERVER = "emb-prod-mre-labkey-01.gel.zone:8080"
-RELEASE_PATH = "main-programme/main-programme_v7_2019-07-25"
+RELEASE_PATH = "main-programme/main-programme_v8_2019-11-28"
 
 def labkey_to_api(table, filename, filter_array, server_context):
 
@@ -31,11 +31,13 @@ print "Connecting to LabKey on " + LABKEY_SERVER + " " + RELEASE_PATH
 
 server_context = labkey.utils.create_server_context(LABKEY_SERVER, RELEASE_PATH, 'labkey', use_ssl=False)
 
-labkey_to_api("gmc_exit_questionnaire", "question.tsv", [], server_context)
+labkey_to_api("gmc_exit_questionnaire", "gmc_exit_questionnaire.tsv", [], server_context)
 
 labkey_to_api("rare_diseases_pedigree_member", "rare_diseases_pedigree_member.tsv", [], server_context)
 
 filter_array = [ labkey.query.QueryFilter('tier', 'TIER1;TIER2', 'in') ]
 
 labkey_to_api("tiering_data", "tiering_data.tsv", filter_array, server_context)
+
+labkey_to_api("rare_diseases_participant_disease", "rare_diseases_participant_disease.tsv", [], server_context)
 
