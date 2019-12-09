@@ -11,6 +11,8 @@ import pandas as pd
 LABKEY_SERVER = "emb-prod-mre-labkey-01.gel.zone:8080"
 RELEASE_PATH = "main-programme/main-programme_v8_2019-11-28"
 
+API_KEY = "" # TODO fill in when available
+
 def labkey_to_api(table, filename, filter_array, server_context):
 
     print "Extracting " + table + " to " + filename
@@ -29,7 +31,7 @@ def labkey_to_api(table, filename, filter_array, server_context):
 
 print "Connecting to LabKey on " + LABKEY_SERVER + " " + RELEASE_PATH
 
-server_context = labkey.utils.create_server_context(LABKEY_SERVER, RELEASE_PATH, 'labkey', use_ssl=False)
+server_context = labkey.utils.create_server_context(LABKEY_SERVER, RELEASE_PATH, 'labkey', use_ssl=False, api_key=API_KEY)
 
 labkey_to_api("gmc_exit_questionnaire", "gmc_exit_questionnaire.tsv", [], server_context)
 
