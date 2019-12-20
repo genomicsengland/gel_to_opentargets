@@ -37,7 +37,11 @@ Currently the Open Targets schema requires that all genetic associations have va
 
 ### Extracting data from LabKey
 
+This can be done in 2 ways, either automatically using a Python script:
+
 `python labkey_extract.py`
+
+or manually - see [Manually extracting data from LabKey](#manually-extracting-data-from-labkey).
 
 ### Rare disease tiering data
 
@@ -91,3 +95,21 @@ Note that the data in `test_data.tsv` is intended to be representative of the ti
 `tail -n +2 phenotypes_text_to_efo.txt | cut -d$'\t' -f 1,2`
 
 8. Note that there are some manual phenotype mappings in `gel_utils.py` in the `apply_phenotype_mapping_overrides` function.
+
+## Manually extracting data from LabKey
+
+Log in to LabKey and navigate to the appropriate Main Programme release. 
+
+Extract each of the following tables to a TSV files. All data in the table should be used with no filters. Navigate to the appropriate table and click on the "Export" button. Then select the "Text" tab, check that it's set to "Tab separated" and then click "Export to text".
+ * `gmc_exit_questionnaire`
+ * `rare_diseases_pedigree_member`
+ * `rare_diseases_participant_disease`
+
+The final table is `tiering_data`, however we only require rows with the Tier column set to `TIER1` or `TIER2`. This filter can be created as follows: navigate to the `tiering_data` table, click on the "Tier" column heading, select "Filter". A filter window appears. On the "Choose values" tab, select _only_ `TIER1` and `TIER2`. Click "OK" and the filter will be applied. You can check this by looking at the number of rows displayed in the top right-hand corner. It should go from approximately 24 million (unfiltered) to 275,000 (filtered).
+Export the filtered table to TSV as described above.
+
+Note that the following URL can be used to access the filtered tiering data directly: http://emb-prod-mre-labkey-01.gel.zone:8080/labkey/query/main-programme/main-programme_v8_2019-11-28/executeQuery.view?schemaName=lists&query.queryName=tiering_data&query.tier~neqornull=TIER3 (the URL may need to be modifed for the release of choice)
+
+You should end up with 4 TSV files (`gmc_exit_questionnaire.tsv`, `rare_diseases_pedigree_member.tsv`, `rare_diseases_participant_disease.tsv`, `tiering_data.tsv`).
+
+
