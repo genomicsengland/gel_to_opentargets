@@ -45,11 +45,11 @@ or manually - see [Manually extracting data from LabKey](#manually-extracting-da
 
 ### Rare disease tiering data
 
-`python gel_tiering_to_ot.py --input test_data.tsv --pedigree sample_pedigree.tsv`
+`python gel_tiering_to_ot.py --input test_data.tsv --pedigree sample_pedigree.tsv > tiering.json`
 
 ### GMC Exit Questionnaire data
 
-`python gel_questionnaire_to_ot.py --input gmc_exit_questionnaire.tsv python gel_questionnaire_to_ot.py --input questionnaire_test_data.tsv --hgnc_to_ensembl hgnc_to_ensembl.txt --disease_file sample_rare_diseases_participant_disease.tsv`
+`python gel_questionnaire_to_ot.py --input gmc_exit_questionnaire.tsv python gel_questionnaire_to_ot.py --input questionnaire_test_data.tsv --hgnc_to_ensembl hgnc_to_ensembl.txt --disease_file sample_rare_diseases_participant_disease.tsv > questionnaire.json`
 
 ## Docker
 
@@ -100,7 +100,7 @@ Note that the data in `test_data.tsv` is intended to be representative of the ti
 
 Log in to LabKey and navigate to the appropriate Main Programme release. 
 
-Extract each of the following tables to a TSV files. All data in the table should be used with no filters. Navigate to the appropriate table and click on the "Export" button. Then select the "Text" tab, check that it's set to "Tab separated" and then click "Export to text".
+Extract each of the following tables to a TSV file. All data in the table should be used with no filters. Navigate to the appropriate table and click on the "Export" button. Then select the "Text" tab, check that it's set to "Tab separated" and then click "Export to text".
  * `gmc_exit_questionnaire`
  * `rare_diseases_pedigree_member`
  * `rare_diseases_participant_disease`
