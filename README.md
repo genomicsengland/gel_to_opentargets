@@ -49,7 +49,7 @@ or manually - see [Manually extracting data from LabKey](#manually-extracting-da
 
 ### GMC Exit Questionnaire data
 
-`python gel_questionnaire_to_ot.py --input gmc_exit_questionnaire.tsv python gel_questionnaire_to_ot.py --input questionnaire_test_data.tsv --hgnc_to_ensembl hgnc_to_ensembl.txt --disease_file sample_rare_diseases_participant_disease.tsv > questionnaire.json`
+`python gel_questionnaire_to_ot.py --input questionnaire_test_data.tsv --hgnc_to_ensembl hgnc_to_ensembl.txt --disease_file sample_rare_diseases_participant_disease.tsv > questionnaire.json`
 
 ## Docker
 
