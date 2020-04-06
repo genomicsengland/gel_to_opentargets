@@ -2,9 +2,11 @@
 
 ## Data sources
 
+Note that the scripts etc in this repo are working as of Genomics England Main Programme Release 8. They may need modification to cope with data changes in future releases.
+
 Two Genomics England data sources are currently supported:
  * Rare disease tiering data from the `tiering_data` table in LabKey
- * Clinical exit questionnaire data from the `gmc_exit_questionnaire` table in LabKey
+ * Clinical exit questionnaire data from the `gmc_exit_questionnaire` table in LabKey. *This needs to be checked to ensure that the filtering and transformation criteria are correct*
  
 This repo contains scripts which will convert the TSV file into JSON (one object per line) according to the Open Targets [JSON schema](https://github.com/opentargets/json_schema) which should be valid according to the [opentargets/validator](https://github.com/opentargets/validator)
 
